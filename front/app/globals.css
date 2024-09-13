@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Dana';
+  src: url('./fonts/dana/DanaFaNum-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dana';
+  src: url('./fonts/dana/DanaFaNum-DemiBold.woff2') format('woff2');
+  font-weight: 600;
+  /* Adjust the weight as needed */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dana';
+  src: url('./fonts/dana/DanaFaNum-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  /* Adjust the weight as needed */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dana';
+  src: url('./fonts/dana/DanaFaNum-Black.woff2') format('woff2');
+  font-weight: 900;
+  /* Adjust the weight as needed */
+  font-style: normal;
+}
+
+/* Example usage */
+body {
+  font-family: 'Dana', sans-serif;
+}
