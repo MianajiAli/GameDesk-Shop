@@ -1,18 +1,24 @@
 const express = require('express');
 const connectDB = require('./database/db');
-const routes = require('./routes');
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const dotEnv = require('dotenv');
 
-// Create an Express app
+// Initialize environment variables
+dotEnv.config();
+
+// Initialize express app
 const app = express();
 
-// Middleware to parse request bodies
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// Import and use routes
-app.use('/api', routes);
-
-// Connect to MongoDB
+// Connect to the database
 connectDB();
 
+// Middleware to parse request bodies
+app.use(express.json());
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+
+// Export the app
 module.exports = app;
