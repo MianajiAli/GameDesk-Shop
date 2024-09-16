@@ -1,0 +1,316 @@
+[
+    {
+        "name": "گوشی موبایل سامسونگ",
+        "price": 10000000,
+        "description": "گوشی موبایل سامسونگ مدل گلکسی A52 با صفحه نمایش 6.5 اینچ و دوربین چهارگانه",
+        "category": "الکترونیک",
+        "stock": 50,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "سفید",
+                    "آبی"
+                ]
+            },
+            {
+                "title": "حافظه داخلی",
+                "values": [
+                    "128 گیگابایت",
+                    "256 گیگابایت"
+                ]
+            }
+        ],
+        "images": [
+            "/products/samsung-galaxy-a52.jpg"
+        ],
+        "imageAlt": "گوشی موبایل سامسونگ گلکسی A52",
+        "discount": 10,
+        "finalPrice": 9000000
+    },
+    {
+        "name": "لپ‌تاپ اپل مک‌بوک پرو",
+        "price": 30000000,
+        "description": "لپ‌تاپ اپل مدل مک‌بوک پرو با پردازنده i7 و حافظه رم 16 گیگابایت",
+        "category": "الکترونیک",
+        "stock": 30,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "فضایی خاکستری",
+                    "نقره‌ای"
+                ]
+            },
+            {
+                "title": "حافظه",
+                "values": [
+                    "512 گیگابایت SSD",
+                    "1 ترابایت SSD"
+                ]
+            }
+        ],
+        "images": [
+            "/products/macbook-pro.jpg"
+        ],
+        "imageAlt": "لپ‌تاپ اپل مک‌بوک پرو",
+        "discount": 5,
+        "finalPrice": 28500000
+    },
+    {
+        "name": "تلویزیون ال‌جی 4K",
+        "price": 7000000,
+        "description": "تلویزیون ال‌جی مدل 55 اینچ با کیفیت تصویر 4K و سیستم صوتی Dolby",
+        "category": "خانه و آشپزخانه",
+        "stock": 20,
+        "attributes": [
+            {
+                "title": "اندازه",
+                "values": [
+                    "55 اینچ",
+                    "65 اینچ"
+                ]
+            },
+            {
+                "title": "نوع صفحه نمایش",
+                "values": [
+                    "LED",
+                    "OLED"
+                ]
+            }
+        ],
+        "images": [
+            "/products/lg-tv-4k.jpg"
+        ],
+        "imageAlt": "تلویزیون ال‌جی 4K",
+        "discount": 8,
+        "finalPrice": 6440000
+    },
+    {
+        "name": "چای ساز فیلیپس",
+        "price": 1200000,
+        "description": "چای ساز فیلیپس با ظرفیت 1.7 لیتر و قابلیت تنظیم دما",
+        "category": "خانه و آشپزخانه",
+        "stock": 40,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "استیل",
+                    "سفید"
+                ]
+            }
+        ],
+        "images": [
+            "/products/philips-tea-maker.jpg"
+        ],
+        "imageAlt": "چای ساز فیلیپس",
+        "discount": 15,
+        "finalPrice": 1020000
+    },
+    {
+        "name": "کفش ورزشی نایک",
+        "price": 2500000,
+        "description": "کفش ورزشی نایک مدل Air Max با طراحی راحت و تنفس‌پذیر",
+        "category": "پوشاک",
+        "stock": 60,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "سفید",
+                    "قرمز"
+                ]
+            },
+            {
+                "title": "سایز",
+                "values": [
+                    "40",
+                    "41",
+                    "42",
+                    "43"
+                ]
+            }
+        ],
+        "images": [
+            "/products/nike-air-max.jpg"
+        ],
+        "imageAlt": "کفش ورزشی نایک Air Max",
+        "discount": 12,
+        "finalPrice": 2200000
+    },
+    {
+        "name": "ساعت هوشمند اپل",
+        "price": 5000000,
+        "description": "ساعت هوشمند اپل مدل Series 6 با قابلیت‌های تناسب اندام و سلامتی",
+        "category": "الکترونیک",
+        "stock": 25,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "سفید",
+                    "قرمز"
+                ]
+            }
+        ],
+        "images": [
+            "/products/apple-watch-series6.jpg"
+        ],
+        "imageAlt": "ساعت هوشمند اپل Series 6",
+        "discount": 7,
+        "finalPrice": 4650000
+    },
+    {
+        "name": "دوربین کانن EOS",
+        "price": 12000000,
+        "description": "دوربین دیجیتال کانن مدل EOS 80D با لنز 18-55 میلی‌متر",
+        "category": "عکاسی",
+        "stock": 15,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "نقره‌ای"
+                ]
+            }
+        ],
+        "images": [
+            "/products/canon-eos-80d.jpg"
+        ],
+        "imageAlt": "دوربین دیجیتال کانن EOS 80D",
+        "discount": 10,
+        "finalPrice": 10800000
+    },
+    {
+        "name": "بخاری برقی دیجی کالا",
+        "price": 800000,
+        "description": "بخاری برقی دیجی کالا با قابلیت تنظیم دما و طراحی مدرن",
+        "category": "خانه و آشپزخانه",
+        "stock": 35,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "سفید"
+                ]
+            }
+        ],
+        "images": [
+            "/products/digi-kala-heater.jpg"
+        ],
+        "imageAlt": "بخاری برقی دیجی کالا",
+        "discount": 5,
+        "finalPrice": 760000
+    },
+    {
+        "name": "کتاب تاریخ ایران",
+        "price": 300000,
+        "description": "کتاب تاریخ ایران نوشته محمدمهدی فولادوند با چاپ جلد سخت",
+        "category": "کتاب و رسانه",
+        "stock": 100,
+        "attributes": [
+            {
+                "title": "نوع جلد",
+                "values": [
+                    "جلد سخت",
+                    "جلد نرم"
+                ]
+            }
+        ],
+        "images": [
+            "/products/iran-history-book.jpg"
+        ],
+        "imageAlt": "کتاب تاریخ ایران",
+        "discount": 20,
+        "finalPrice": 240000
+    },
+    {
+        "name": "پیراهن مردانه زارا",
+        "price": 800000,
+        "description": "پیراهن مردانه زارا مدل کلاسیک با طراحی ساده و شیک",
+        "category": "پوشاک",
+        "stock": 70,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "آبی",
+                    "سفید",
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "سایز",
+                "values": [
+                    "M",
+                    "L",
+                    "XL"
+                ]
+            }
+        ],
+        "images": [
+            "/products/zara-mens-shirt.jpg"
+        ],
+        "imageAlt": "پیراهن مردانه زارا",
+        "discount": 10,
+        "finalPrice": 720000
+    },
+    {
+        "name": "ماشین اصلاح پاناسونیک",
+        "price": 1500000,
+        "description": "ماشین اصلاح پاناسونیک مدل ER-GB80 با تیغه‌های تیز و قابل شستشو",
+        "category": "آرایشی و بهداشتی",
+        "stock": 45,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "نقره‌ای"
+                ]
+            }
+        ],
+        "images": [
+            "/products/panasonic-trimmer.jpg"
+        ],
+        "imageAlt": "ماشین اصلاح پاناسونیک ER-GB80",
+        "discount": 8,
+        "finalPrice": 1380000
+    },
+    {
+        "name": "دوچرخه کوهستان",
+        "price": 4500000,
+        "description": "دوچرخه کوهستان با فریم آلومینیومی و سیستم تعلیق جلو",
+        "category": "ورزش",
+        "stock": 10,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "قرمز",
+                    "آبی",
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "سایز",
+                "values": [
+                    "سایز M",
+                    "سایز L"
+                ]
+            }
+        ],
+        "images": [
+            "/products/mountain-bike.jpg"
+        ],
+        "imageAlt": "دوچرخه کوهستان",
+        "discount": 12,
+        "finalPrice": 3960000
+    }
+]

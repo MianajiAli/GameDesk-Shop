@@ -1,14 +1,14 @@
 import Image from "next/image";
 
-const ProductCard = ({ title, description, originalPrice, discountedPrice, discount, imageSrc }) => {
+const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc }) => {
     const formatPrice = (price) => {
         return new Intl.NumberFormat().format(price);
     };
 
     return (
         <div className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg">
-            <div className="relative w-32 sm:w-52 aspect-square p-1">
-                <Image
+            <div className="relative w-32 sm:w-52 aspect-square p-1 bg-black/5">
+                {/* <Image
                     src={imageSrc}
                     alt={title}
                     fill
@@ -16,7 +16,7 @@ const ProductCard = ({ title, description, originalPrice, discountedPrice, disco
                     priority={true}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="rounded-lg object-contain w-full h-full"
-                />
+                /> */}
             </div>
             <div className="p-2 w-52 flex flex-col justify-between">
                 <div>
