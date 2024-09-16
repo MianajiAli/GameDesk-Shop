@@ -15,17 +15,17 @@ const ProductCard = ({ title, description, originalPrice, discountedPrice, disco
                     placeholder='empty'
                     priority={true}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className=" rounded-lg object-contain  w-full h-full"
+                    className="rounded-lg object-contain w-full h-full"
                 />
             </div>
             <div className="p-2 w-52 flex flex-col justify-between">
                 <div>
-                    <h3 dir="rtl" className="text-base ">{title}</h3>
+                    <h3 dir="rtl" className="text-base">{title}</h3>
                     {/* <p dir="rtl" className="text-sm opacity-70">{description}</p> */}
                 </div>
                 <div className="flex justify-between mt-2">
                     <div className="flex gap-1 items-center opacity-80">
-                        {discount ? (
+                        {discount && discount !== 0 ? (
                             <>
                                 <span className="ml-1 text-lg opacity-60 text-red-800 font-semibold line-through">
                                     {formatPrice(originalPrice)}
@@ -37,7 +37,6 @@ const ProductCard = ({ title, description, originalPrice, discountedPrice, disco
                         )}
                         <svg
                             className="w-4 h-4"
-                            aria-label="Discount Icon"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 1080 1080"
                         >
@@ -47,7 +46,7 @@ const ProductCard = ({ title, description, originalPrice, discountedPrice, disco
                             <rect x="473.38" y="562.75" width="322.5" height="112" transform="translate(1253.38 -15.88) rotate(90)" />
                         </svg>
                     </div>
-                    {discount && (
+                    {discount !== 0 && (
                         <span className="inline-flex items-center rounded-md bg-red-50 px-1 py-0 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
                             {discount}
                         </span>

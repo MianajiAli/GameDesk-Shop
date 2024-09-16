@@ -6,10 +6,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'fakestoreapi.com'
             },
-            // {
-            //     protocol: 'https',
-            //     hostname: 'hydeparkwinterwonderland.com'
-            // },
+            {
+                protocol: 'https',
+                hostname: 'example.com'
+            },
             // {
             //     protocol: 'https',
             //     hostname: 'wembleypark.com'

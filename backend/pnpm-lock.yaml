@@ -27,6 +27,9 @@ importers:
         specifier: ^8.6.2
         version: 8.6.2
     devDependencies:
+      faker:
+        specifier: ^6.6.6
+        version: 6.6.6
       nodemon:
         specifier: ^3.1.4
         version: 3.1.4
@@ -202,6 +205,9 @@ packages:
   express@4.21.0:
     resolution: {integrity: sha512-VqcNGcj/Id5ZT1LZ/cfihi3ttTn+NJmkli2eZADigjq29qTlWi/hAQ43t/VLPq8+UX06FCEx3ByOYet6ZFblng==}
     engines: {node: '>= 0.10.0'}
+
+  faker@6.6.6:
+    resolution: {integrity: sha512-9tCqYEDHI5RYFQigXFwF1hnCwcWCOJl/hmll0lr5D2Ljjb0o4wphb69wikeJDz5qCEzXCoPvG6ss5SDP6IfOdg==}
 
   filelist@1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
@@ -770,6 +776,8 @@ snapshots:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+
+  faker@6.6.6: {}
 
   filelist@1.0.4:
     dependencies:
