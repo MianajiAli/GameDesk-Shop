@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', getProducts);
 
 // Admin routes
-router.post('/', protect, admin, createProduct);
+router.post('/', createProduct);
 router.put('/:id', protect, admin, updateProduct);
 router.delete('/:id', protect, admin, deleteProduct);
 

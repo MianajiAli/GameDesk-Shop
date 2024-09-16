@@ -35,12 +35,12 @@ const ProductSchema = new mongoose.Schema({
         default: 0,
     },
     attributes: [AttributeSchema], // Array of attributes with Persian titles
-    imageUrl: {
-        type: String,
+    images: {
+        type: [String], // Array of image URLs
         required: true,
     },
     imageAlt: {
-        type: String,
+        type: String, // Alternate text for the images
         default: function () {
             return this.name; // Default to product name
         },
