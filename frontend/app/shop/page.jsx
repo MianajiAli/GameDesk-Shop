@@ -13,12 +13,7 @@ export default async function Page() {
                 {products.map(product => (
                     <ProductCard
                         key={product._id}
-                        title={product.name}
-                        originalPrice={product.price}
-                        discountedPrice={product.finalPrice}
-                        discount={product.discount}
-                        imageAlt={product.imageAlt}
-                        imageSrc={product.images}
+                        product={product}
                     />
                 ))}
             </div>

@@ -1,4 +1,6 @@
 "use client"
+import Image from 'next/image';
+import Link from 'next/link';
 // pages/products/index.js
 import { useEffect, useState } from 'react';
 
@@ -22,17 +24,32 @@ const ProductsPage = () => {
     return (
         <div>
             <h1>All Products</h1>
-            <ul>
+            <div className="w-full flex flex-col gap-5 p-10">
                 {products.map(product => (
-                    <li key={product._id}>
-                        <h2>{product.name}</h2>
-                        <p>{product.description}</p>
-                        <p>Price: ${product.price}</p>
-                        <p>Stock: {product.stock}</p>
-                        <p>Category: {product.category}</p>
-                    </li>
+                    <div dir="rtl" className="w-full rounded-xl bg-black/5  p-3 flex flex-row gap-5" key={product._id}>
+                        <div className="relative w-32 sm:w-56 aspect-square  ">
+                            <Image
+                                src={`http://localhost:8000${product.images[0]}`}
+                                alt={product.title}
+                                fill
+                                placeholder='empty'
+                                priority={true}
+                                sizes="100%"
+                                className="rounded-lg object-contain bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm   "
+                            />
+                        </div>
+                        <div className=" text-right " >
+
+                            <h2>نام محصول: {product.name}</h2>
+                            <p>توضیحات: {product.description}</p>
+                            <p>قیمت: ${product.price}</p>
+                            <p>موجودی: {product.stock}</p>
+                            <p>دسته بندی: {product.category}</p>
+                        </div>
+                        <Link href={`/admin/products/${product._id}`}>edit</Link>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

@@ -1,17 +1,18 @@
 import Image from "next/image";
-const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc }) => {
-    const imageUrl = process.env.BACKEND_API_URL + imageSrc[0];
+import Link from "next/link";
+const ProductCard = ({ product }) => {
+    const imageUrl = process.env.BACKEND_API_URL + product.images[0];
     const formatPrice = (price) => {
         return new Intl.NumberFormat().format(price);
     };
 
     return (
 
-        <div className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-3 gap-3">
+        <Link href={"/shop/" + product._id} className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-3 gap-3">
             <div className="relative w-32 sm:w-56 aspect-square  ">
                 <Image
                     src={imageUrl}
-                    alt={title}
+                    alt={product.imageAlt}
                     fill
                     placeholder='empty'
                     priority={true}
@@ -21,23 +22,23 @@ const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc
             </div>
             <div className="w-56 flex flex-col justify-between">
                 <div>
-                    <h3 dir="rtl" className="text-base">{title}</h3>
+                    <h3 dir="rtl" className="text-base">{product.name}</h3>
                     {/* <p dir="rtl" className="text-sm opacity-70">{description}</p> */}
                 </div>
                 <div className="flex justify-between mt-2">
                     <div className="flex gap-1 items-center opacity-80">
-                        {discount && discount !== 0 ? (
+                        {product.discount && product.discount !== 0 ? (
                             <>
                                 <span className="text-lg font-semibold ">
-                                    {formatPrice(discountedPrice)}
+                                    {formatPrice(product.finalPrice)}
                                 </span>
                                 <span className="text-sm font-semibold opacity-60 text-red-800 line-through">
-                                    {formatPrice(originalPrice)}
+                                    {formatPrice(product.price)}
 
                                 </span>
                             </>
                         ) : (
-                            <span className="text-lg font-semibold"> {formatPrice(originalPrice)}</span>
+                            <span className="text-lg font-semibold"> {formatPrice(product.price)}</span>
                         )}
                         {/* <svg
                             className="w-4 h-4"
@@ -50,14 +51,14 @@ const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc
                             <rect x="473.38" y="562.75" width="322.5" height="112" transform="translate(1253.38 -15.88) rotate(90)" />
                         </svg> */}
                     </div>
-                    {discount !== 0 && (
+                    {product.discount !== 0 && (
                         <span className="inline-flex items-center rounded-md bg-red-50 px-1 py-0 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                            {discount} %
+                            {product.discount} %
                         </span>
                     )}
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
