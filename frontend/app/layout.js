@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import "./globals.css";
+import "./assets/globals.css";
 require('dotenv').config();
 
 import Header from "@/components/Header";

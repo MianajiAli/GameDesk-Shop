@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc }) => {
     const imageUrl = process.env.BACKEND_API_URL + imageSrc[0];
     const formatPrice = (price) => {
@@ -8,14 +7,13 @@ const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc
 
     return (
 
-        <Link href="" className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-5 gap-3">
+        <div className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-5 gap-3">
             <div className="relative w-32 sm:w-56 aspect-square  ">
                 <Image
                     src={imageUrl}
                     alt={title}
                     fill
-                    placeholder='blur'
-                    blurDataURL={imageUrl}
+                    placeholder='empty'
                     priority={true}
                     sizes="100%"
                     className="rounded-lg object-contain bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm   "
@@ -59,7 +57,7 @@ const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc
                     )}
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

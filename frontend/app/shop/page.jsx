@@ -3,7 +3,7 @@ const apiUrl = process.env.BACKEND_API_URL;
 
 export default async function Page() {
     try {
-        console.log(`${apiUrl}/api/products`)
+
         let data = await fetch(`${apiUrl}/api/products`, { cache: 'no-store' });
         // let data = await fetch(`${apiUrl}/api/products`, { revalidate: 10 })
         let products = await data.json();
