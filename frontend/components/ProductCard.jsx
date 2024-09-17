@@ -7,7 +7,7 @@ const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc
 
     return (
 
-        <div className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-5 gap-3">
+        <div className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-3 gap-3">
             <div className="relative w-32 sm:w-56 aspect-square  ">
                 <Image
                     src={imageUrl}
