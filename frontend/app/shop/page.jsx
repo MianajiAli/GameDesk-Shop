@@ -16,8 +16,9 @@ export default async function Page() {
                         title={product.name}
                         originalPrice={product.price}
                         discountedPrice={product.finalPrice}
-                        discount={0}
+                        discount={product.discount}
                         imageAlt={product.imageAlt}
+                        imageSrc={product.images}
                     />
                 ))}
             </div>

@@ -1,24 +1,27 @@
 import Image from "next/image";
-
+import Link from "next/link";
 const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc }) => {
+    const imageUrl = process.env.BACKEND_API_URL + imageSrc[0];
     const formatPrice = (price) => {
         return new Intl.NumberFormat().format(price);
     };
 
     return (
-        <div className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg">
-            <div className="relative w-32 sm:w-52 aspect-square p-1 bg-black/5">
-                {/* <Image
-                    src={imageSrc}
+
+        <Link href="" className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-5 gap-3">
+            <div className="relative w-32 sm:w-56 aspect-square  ">
+                <Image
+                    src={imageUrl}
                     alt={title}
                     fill
-                    placeholder='empty'
+                    placeholder='blur'
+                    blurDataURL={imageUrl}
                     priority={true}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="rounded-lg object-contain w-full h-full"
-                /> */}
+                    sizes="100%"
+                    className="rounded-lg object-contain bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm   "
+                />
             </div>
-            <div className="p-2 w-52 flex flex-col justify-between">
+            <div className="w-56 flex flex-col justify-between">
                 <div>
                     <h3 dir="rtl" className="text-base">{title}</h3>
                     {/* <p dir="rtl" className="text-sm opacity-70">{description}</p> */}
@@ -27,15 +30,18 @@ const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc
                     <div className="flex gap-1 items-center opacity-80">
                         {discount && discount !== 0 ? (
                             <>
-                                <span className="ml-1 text-lg opacity-60 text-red-800 font-semibold line-through">
-                                    {formatPrice(originalPrice)}
+                                <span className="text-lg font-semibold ">
+                                    {formatPrice(discountedPrice)}
                                 </span>
-                                <span className="text-sm font-semibold"> {formatPrice(discountedPrice)}</span>
+                                <span className="text-sm font-semibold opacity-60 text-red-800 line-through">
+                                    {formatPrice(originalPrice)}
+
+                                </span>
                             </>
                         ) : (
                             <span className="text-lg font-semibold"> {formatPrice(originalPrice)}</span>
                         )}
-                        <svg
+                        {/* <svg
                             className="w-4 h-4"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 1080 1080"
@@ -44,16 +50,16 @@ const ProductCard = ({ title, originalPrice, discountedPrice, discount, imageSrc
                             <rect x="383.63" y="238.5" width="301" height="112" />
                             <rect x="278.38" y="562.75" width="322.5" height="112" transform="translate(1058.38 179.12) rotate(90)" />
                             <rect x="473.38" y="562.75" width="322.5" height="112" transform="translate(1253.38 -15.88) rotate(90)" />
-                        </svg>
+                        </svg> */}
                     </div>
                     {discount !== 0 && (
                         <span className="inline-flex items-center rounded-md bg-red-50 px-1 py-0 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                            {discount}
+                            {discount} %
                         </span>
                     )}
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

@@ -36,12 +36,22 @@ export default function LoginPage() {
             }
 
             // Handle successful login
-            // For example, redirect or store token
+            const data = await response.json();
+
+            // Assume the token is in the response body
+            const token = data.token;
+
+            // Save the token to local storage
+            localStorage.setItem('authToken', token);
+
+            // Optionally, redirect the user or update state
+            window.location.href = '/shop'; // Redirect to another page
 
         } catch (error) {
             setError(error.message);
         }
     };
+
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">

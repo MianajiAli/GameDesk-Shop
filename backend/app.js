@@ -16,7 +16,7 @@ connectDB();
 // Middleware to parse request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // This is needed to parse URL-encoded payloads
-app.use(express.static('./public'));
+app.use(express.static('./storage'));
 
 // Routes
 app.use('/api/auth', authRoutes);
