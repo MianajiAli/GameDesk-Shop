@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import apiClient from '@/lib/apiClient';
+import RemoveFromCart from '@/components/RemoveFromCart';
 
 export default function CartComponent() {
     const [cartData, setCartData] = useState(null);
@@ -32,14 +33,17 @@ export default function CartComponent() {
             {cartData && (
                 <div>
                     <h2>Total Price: {cartData.totalPrice}</h2>
-                    <ul>
+                    <ul className=" w-10/12 mx-auto flex flex-col gap-5  ">
                         {cartData.items.map((item) => (
-                            <li key={item._id}>
+                            <li key={item._id} dir="rtl" className="w-full flex justify-between bg-black/5 rounded-md text-right">
                                 <h3>{item.product.name}</h3>
+                                <h3>{item.product.price}</h3>
+                                <h3>{item.product.discount}%</h3>
+                                <h3>{item.product.finalPrice}</h3>
+                                <p>Quantity: {item.quantity}</p>
                                 <p>Price: {item.product.finalPrice}</p>
 
-
-                                <p>Quantity: {item.quantity}</p>
+                                <RemoveFromCart productId={item.product._id} />
                             </li>
                         ))}
                     </ul>

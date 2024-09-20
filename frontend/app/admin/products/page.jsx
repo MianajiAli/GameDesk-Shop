@@ -10,7 +10,7 @@ const ProductsPage = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/products?page=2');
+                const response = await fetch('http://localhost:8000/api/products?page=3');
                 const data = await response.json();
                 setProducts(data.products);
             } catch (error) {

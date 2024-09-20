@@ -1,3 +1,5 @@
+import Link from "next/link"; // Import Link for navigation
+import AddToCart from "@/components/AddToCart";
 import api from "@/lib/api";
 
 export default async function Page({ params }) {
@@ -10,8 +12,8 @@ export default async function Page({ params }) {
             throw new Error(product.error);
         }
 
-        // Destructure product details
-        const { name, price, description, category, stock, attributes } = product;
+        // Destructure product details, including the product URL
+        const { _id, name, price, description, category, stock, attributes, productUrl } = product;
 
         return (
             <div className="mx-auto py-10 w-11/12">
@@ -20,6 +22,18 @@ export default async function Page({ params }) {
                 <p><strong>Description:</strong> {description}</p>
                 <p><strong>Category:</strong> {category}</p>
                 <p><strong>Stock:</strong> {stock}</p>
+
+                {/* Render the product URL if available */}
+                {productUrl && (
+                    <p>
+                        <strong>Product URL:</strong>{" "}
+                        <a href={productUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                            {productUrl}
+                        </a>
+                    </p>
+                )}
+
+                <AddToCart productId={_id} count={1} />
 
                 {/* Map additional attributes if available */}
                 {attributes && attributes.length > 0 && (
@@ -30,7 +44,7 @@ export default async function Page({ params }) {
                                 <li key={index}>
                                     <strong>{attribute.title}:</strong>
                                     <ul>
-                                        {attribute.values.map(attr => <li>{attr}</li>)}
+                                        {attribute.values.map((attr, index) => <li key={index}>{attr}</li>)}
                                     </ul>
                                 </li>
                             ))}

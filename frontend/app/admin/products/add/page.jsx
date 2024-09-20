@@ -11,6 +11,7 @@ const ProductForm = () => {
         images: '',
         imageAlt: '',
         discount: '',
+        productUrl: '',
         attributes: [{ title: '', values: [''] }]
     });
 
@@ -64,7 +65,7 @@ const ProductForm = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8000/api/products', {
+            const response = await fetch('http://localhost:8000/api/products/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`, // Add token to headers
@@ -126,7 +127,17 @@ const ProductForm = () => {
                         required
                     />
                 </div>
-
+                <div className="flex-1">
+                    <label className="block text-sm font-medium">productUrl:</label>
+                    <input
+                        type="text"
+                        name="productUrl"
+                        value={formData.productUrl}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    />
+                </div>
                 <div className="flex flex-wrap gap-4">
                     <div className="flex-1">
                         <label className="block text-sm font-medium">Category:</label>

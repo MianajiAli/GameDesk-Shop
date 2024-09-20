@@ -11,21 +11,24 @@ export default async function api(url, token) {
             cache: 'no-store'
         });
 
-        if (!response.ok) {
-            switch (response.status) {
-                case 400:
-                    return { error: 'Bad Request' };
-                case 403:
-                    return { error: 'Forbidden' };
-                case 404:
-                    return { error: 'Not Found' };
-                case 500:
-                    return { error: 'Internal Server Error' };
-                case 503:
-                    return { error: 'Service Unavailable' };
-                default:
-                    throw new Error('Network response was not ok.');
-            }
+
+        switch (response.status) {
+            case 200:
+                break
+            case 201:
+                break
+            case 400:
+                return { error: 'Bad Request' };
+            case 403:
+                return { error: 'Forbidden' };
+            case 404:
+                return { error: 'Not Found' };
+            case 500:
+                return { error: 'Internal Server Error' };
+            case 503:
+                return { error: 'Service Unavailable' };
+            default:
+                throw new Error('Network response was not ok.');
         }
 
         // If the response is ok, parse the JSON data

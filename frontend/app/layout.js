@@ -1,7 +1,5 @@
 import localFont from "next/font/local";
 import "./assets/globals.css";
-require('dotenv').config();
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
