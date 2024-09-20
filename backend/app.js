@@ -2,6 +2,8 @@ const express = require('express');
 const connectDB = require('./database/db');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+// const orderRoutes = require('./routes/orderRoutes');
+// const paymentRoutes = require('./routes/paymentRoutes');
 const dotEnv = require('dotenv');
 
 // Initialize environment variables
@@ -21,6 +23,8 @@ app.use(express.static('./storage'));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+// app.use('/api/orders', orderRoutes);
+// app.use('/api/payments', paymentRoutes);
 
 // Export the app
 module.exports = app;
