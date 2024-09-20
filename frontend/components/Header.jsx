@@ -6,7 +6,7 @@ const navItems = [
     { label: 'صفحه اصلی', href: '/' },
     { label: 'فروشگاه', href: '/shop/1' },
     { label: 'بلاگ', href: '/blog' },
-    { label: 'سبد خرید', href: '/cart' },
+    { label: 'سبد خرید', href: '/shop/cart' },
     { label: 'ادمین', href: '/admin' }
 ];
 

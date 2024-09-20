@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//Todo: add product url and product id
+
 // Define the schema for attribute with Persian title
 const AttributeSchema = new mongoose.Schema({
     title: {
@@ -23,7 +23,6 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         min: 0, // Ensure price is non-negative
     },
-
     description: {
         type: String,
     },
@@ -51,7 +50,7 @@ const ProductSchema = new mongoose.Schema({
     discount: {
         type: Number, // Discount amount or percentage
         default: 0,
-        min: 0, // Ensure stock is non-negative
+        min: 0, // Ensure discount is non-negative
     },
     finalPrice: {
         type: Number,
@@ -59,6 +58,10 @@ const ProductSchema = new mongoose.Schema({
         default: function () {
             return this.price - (this.price * (this.discount / 100));
         },
+    },
+    productUrl: {
+        type: String, // URL for the product page
+        required: true,
     },
 }, { timestamps: true });
 

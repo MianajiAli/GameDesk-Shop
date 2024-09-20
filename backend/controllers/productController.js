@@ -36,20 +36,20 @@ exports.getProductById = async (req, res) => {
     }
 };
 
-// Create new product (admin only)
+
 // Create new products (admin only)
 exports.createProduct = async (req, res) => {
     const productsData = Array.isArray(req.body) ? req.body : [req.body]; // Ensure it is an array
 
     // Validate required fields for each product
     const invalidProducts = productsData.filter(product => {
-        const { name, price, category, stock, images } = product;
-        return !name || !price || !category || !stock || !images;
+        const { name, price, category, stock, images, productUrl } = product;
+        return !name || !price || !category || !stock || !images || !productUrl;
     });
 
     if (invalidProducts.length > 0) {
         return res.status(400).json({
-            message: 'name, price, category, stock, and images are required for each product',
+            message: 'name, price, category, stock, images, and productUrl are required for each product',
             invalidProducts
         });
     }
@@ -70,10 +70,11 @@ exports.createProduct = async (req, res) => {
 };
 
 
+
 // Update product (admin only)
 exports.updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, price, description, category, stock, attributes, images, imageAlt, discount } = req.body;
+    const { name, price, description, category, stock, attributes, images, imageAlt, discount, productUrl } = req.body;
 
     const parsedDiscount = parseFloat(discount);
 
@@ -92,6 +93,7 @@ exports.updateProduct = async (req, res) => {
             images,
             imageAlt,
             discount: discount !== undefined ? parsedDiscount : undefined,
+            productUrl // Add the productUrl field here
         }, { new: true });
 
         if (!product) return res.status(404).json({ message: 'Product not found' });
@@ -100,6 +102,7 @@ exports.updateProduct = async (req, res) => {
         res.status(500).json({ message: 'Error updating product', error: error.message });
     }
 };
+
 
 // Delete product (admin only)
 exports.deleteProduct = async (req, res) => {

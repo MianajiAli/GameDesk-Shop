@@ -8,7 +8,7 @@ router.get('/', getProducts);
 router.get('/:id', getProductById); // Route to get a product by ID
 
 // Admin routes
-router.post('/', createProduct);
+router.post('/', protect, admin, createProduct);
 router.put('/:id', protect, admin, updateProduct);
 router.delete('/:id', protect, admin, deleteProduct);
 

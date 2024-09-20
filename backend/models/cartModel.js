@@ -1,5 +1,17 @@
 const mongoose = require('mongoose');
 
+// Define the schema for cart item attributes
+const AttributeSchema = new mongoose.Schema({
+    key: {
+        type: String,
+        required: true, // E.g., 'color', 'size', etc.
+    },
+    value: {
+        type: String,
+        required: true, // E.g., 'red', 'medium', etc.
+    }
+});
+
 // Define the schema for cart items
 const CartItemSchema = new mongoose.Schema({
     product: {
@@ -12,6 +24,10 @@ const CartItemSchema = new mongoose.Schema({
         required: true,
         min: 1, // Ensure at least one item
     },
+    attributes: {
+        type: [AttributeSchema], // Array of key-value attributes
+        default: [] // Default to an empty array if no attributes are provided
+    }
 });
 
 // Define the Cart schema
@@ -27,14 +43,5 @@ const CartSchema = new mongoose.Schema({
         default: 0,
     },
 }, { timestamps: true });
-
-// Pre-save middleware to calculate totalPrice before saving
-CartSchema.pre('save', function (next) {
-    this.totalPrice = this.items.reduce((total, item) => {
-        return total + (item.quantity * item.product.price);
-    }, 0);
-
-    next();
-});
 
 module.exports = mongoose.model('Cart', CartSchema);
