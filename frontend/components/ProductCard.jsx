@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
 
     return (
 
-        <Link href={"/shop/" + product._id} className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-3 gap-3">
+        <Link href={"/shop/product/" + product._id} className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-3 gap-3">
             <div className="relative w-32 sm:w-56 aspect-square  ">
                 <Image
                     src={imageUrl}
