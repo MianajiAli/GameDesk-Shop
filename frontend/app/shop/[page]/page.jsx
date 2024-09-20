@@ -2,10 +2,23 @@ import ProductCard from "@/components/ProductCard";
 import api from "@/lib/api";
 
 export default async function Page({ params }) {
+    if (params) {
+        const page = Number(params.page);
+
+        // Validate that page is a number between 1 and 10000
+        if (isNaN(page) || page < 1 || page > 10000) {
+            return (
+                <div className="mx-auto py-10 w-11/12 text-center">
+                    <p>Invalid page number. Please enter a number between 1 and 10,000.</p>
+                </div>
+            );
+        }
+    }
+
     try {
         // Fetch products from the API
         const data = await api(`/api/products/?page=${params.page}`);
-        const products = await data.products
+        const products = await data.products;
 
         // Check if the returned data contains an error message
         if (products.error) {
@@ -16,7 +29,7 @@ export default async function Page({ params }) {
         if (!products.length) {
             return (
                 <div className="mx-auto py-10 w-11/12 text-center">
-                    <p>No products available.</p>
+                    <p>Page Not Found</p>
                 </div>
             );
         }
