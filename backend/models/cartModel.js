@@ -27,6 +27,10 @@ const CartItemSchema = new mongoose.Schema({
     attributes: {
         type: [AttributeSchema], // Array of key-value attributes
         default: [] // Default to an empty array if no attributes are provided
+    },
+    itemTotal: {
+        type: Number,
+        default: 0, // This will be calculated before saving
     }
 });
 
@@ -43,5 +47,28 @@ const CartSchema = new mongoose.Schema({
         default: 0,
     },
 }, { timestamps: true });
+
+// Add a pre-save hook to calculate item totals and total price
+CartSchema.pre('save', async function (next) {
+    const cart = this;
+    let total = 0;
+
+    // Populate the product field to get product prices
+    await cart.populate('items.product');
+
+    // Calculate the total price by summing each item's price * quantity
+    cart.items.forEach(item => {
+        if (item.product && item.quantity) {
+            // Calculate the item total
+            item.itemTotal = item.product.finalPrice * item.quantity;
+            // Add to the total cart price
+            total += item.itemTotal;
+        }
+    });
+
+    // Set the total price of the cart
+    cart.totalPrice = total;
+    next();
+});
 
 module.exports = mongoose.model('Cart', CartSchema);
