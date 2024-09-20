@@ -16,6 +16,7 @@ export default async function Page({ params }) {
         const { _id, name, price, description, category, stock, attributes, productUrl } = product;
 
         return (
+
             <div className="mx-auto py-10 w-11/12">
                 <h1 className="text-2xl font-bold mb-4">{name}</h1>
                 <p><strong>Price:</strong> {price.toLocaleString()} IRR</p>
@@ -38,6 +39,7 @@ export default async function Page({ params }) {
                 {/* Map additional attributes if available */}
                 {attributes && attributes.length > 0 && (
                     <div className="mt-4">
+
                         <h2 className="text-xl font-semibold">Attributes:</h2>
                         <ul className="list-disc list-inside">
                             {attributes.map((attribute, index) => (

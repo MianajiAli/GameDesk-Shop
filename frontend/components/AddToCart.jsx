@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import apiClient from "@/lib/apiClient";
+import { toast } from 'react-toastify';
+
 //TODO: Add attr from props and pass ti to api
 const AddToCart = ({ productId, count }) => {
     const handleAddToCart = async () => {
@@ -11,7 +13,7 @@ const AddToCart = ({ productId, count }) => {
             });
             if (!response.error) {
                 // Optionally handle success, e.g., show a message or update state
-                console.log("Product added to cart successfully");
+                toast.success("Product added to cart successfully")
             } else {
                 console.log(error)
             }

@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./assets/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Notification from "@/components/Notification";
 
 
 // const geistSans = localFont({
@@ -27,9 +28,11 @@ export default function RootLayout({ children }) {
         className={`antialiased`}
       >
         <Header />
-        <div className="w-full min-h-screen flex flex-col">
-          {children}
-        </div>
+        <Notification>
+          <div className="w-full min-h-screen flex flex-col">
+            {children}
+          </div>
+        </Notification>
         <Footer />
       </body>
     </html>
