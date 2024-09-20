@@ -10,7 +10,8 @@ const RemoveFromCart = ({ productId, count }) => {
             });
             if (!response.error) {
                 // Optionally handle success, e.g., show a message or update state
-                console.log("Product removed From cart successfully");
+                toast.success("Product removed From cart successfully")
+
             } else {
                 console.log(error)
             }
