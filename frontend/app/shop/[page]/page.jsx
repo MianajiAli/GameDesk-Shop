@@ -1,10 +1,11 @@
 import ProductCard from "@/components/ProductCard";
 import api from "@/lib/api";
 
-export default async function Page() {
+export default async function Page({ params }) {
     try {
         // Fetch products from the API
-        const products = await api(`/api/products/`);
+        const data = await api(`/api/products/?page=${params.page}`);
+        const products = await data.products
 
         // Check if the returned data contains an error message
         if (products.error) {
