@@ -1,13 +1,26 @@
 import ProductCard from "@/components/ProductCard";
-const apiUrl = process.env.BACKEND_API_URL;
+import api from "@/lib/api";
 
 export default async function Page() {
     try {
+        // Fetch products from the API
+        const products = await api(`/api/products/`);
 
-        let data = await fetch(`${apiUrl}/api/products`, { cache: 'no-store' });
-        // let data = await fetch(`${apiUrl}/api/products`, { revalidate: 10 })
-        let products = await data.json();
+        // Check if the returned data contains an error message
+        if (products.error) {
+            throw new Error(products.error);
+        }
 
+        // If the products list is empty, show a message
+        if (!products.length) {
+            return (
+                <div className="mx-auto py-10 w-11/12 text-center">
+                    <p>No products available.</p>
+                </div>
+            );
+        }
+
+        // Render the products list
         return (
             <div className="mx-auto py-10 w-11/12 flex items-center justify-center flex-wrap gap-5">
                 {products.map(product => (
@@ -19,7 +32,14 @@ export default async function Page() {
             </div>
         );
     } catch (error) {
+        // Handle any errors that occur during the API call
         console.error('Error fetching products:', error);
-        return <div>Error loading products</div>;
+
+        // Return an error message to display on the page
+        return (
+            <div className="mx-auto py-10 w-11/12 text-center">
+                <p>Error fetching products: {error.message}</p>
+            </div>
+        );
     }
 }

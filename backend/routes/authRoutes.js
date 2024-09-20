@@ -5,5 +5,5 @@ const router = express.Router();
 // Routes for authentication
 router.post('/register', register);
 router.post('/login', login);
-
+//TODO : Add logout 
 module.exports = router;

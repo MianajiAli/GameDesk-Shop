@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//Todo: add product url and product id
 // Define the schema for attribute with Persian title
 const AttributeSchema = new mongoose.Schema({
     title: {
