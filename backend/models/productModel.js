@@ -21,7 +21,9 @@ const ProductSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
+        min: 0, // Ensure price is non-negative
     },
+
     description: {
         type: String,
     },
@@ -33,6 +35,7 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0,
+        min: 0, // Ensure stock is non-negative
     },
     attributes: [AttributeSchema], // Array of attributes with Persian titles
     images: {
@@ -48,6 +51,7 @@ const ProductSchema = new mongoose.Schema({
     discount: {
         type: Number, // Discount amount or percentage
         default: 0,
+        min: 0, // Ensure stock is non-negative
     },
     finalPrice: {
         type: Number,
