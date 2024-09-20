@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
                     placeholder='empty'
                     priority={true}
                     sizes="100%"
-                    className="rounded-lg object-contain bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm   "
+                    className="rounded-lg object-cover bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm   "
                 />
             </div>
             <div className="w-56 flex flex-col justify-between">

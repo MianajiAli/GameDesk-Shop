@@ -1,32 +1,31 @@
 import ProductCard from "@/components/ProductCard";
+import Pagination from "@/components/Pagination"; // Import the Pagination component
 import api from "@/lib/api";
 
 export default async function Page({ params }) {
-    if (params) {
-        const page = Number(params.page);
+    const page = params ? Number(params.page) : 1;
 
-        // Validate that page is a number between 1 and 10000
-        if (isNaN(page) || page < 1 || page > 10000) {
-            return (
-                <div className="mx-auto py-10 w-11/12 text-center">
-                    <p>Invalid page number. Please enter a number between 1 and 10,000.</p>
-                </div>
-            );
-        }
+    // Validate that page is a number between 1 and 10000
+    if (isNaN(page) || page < 1 || page > 10000) {
+        return (
+            <div className="mx-auto py-10 w-11/12 text-center">
+                <p>Invalid page number. Please enter a number between 1 and 10,000.</p>
+            </div>
+        );
     }
 
     try {
         // Fetch products from the API
-        const data = await api(`/api/products/?page=${params.page}`);
-        const products = await data.products;
+        const response = await api(`/api/products/?page=${page}`);
+        const { products, error, totalPages } = await response;
 
         // Check if the returned data contains an error message
-        if (products.error) {
-            throw new Error(products.error);
+        if (error) {
+            throw new Error(error);
         }
 
         // If the products list is empty, show a message
-        if (!products.length) {
+        if (!products || products.length === 0) {
             return (
                 <div className="mx-auto py-10 w-11/12 text-center">
                     <p>Page Not Found</p>
@@ -34,15 +33,21 @@ export default async function Page({ params }) {
             );
         }
 
-        // Render the products list
+        // Render the products list and pagination
         return (
-            <div className="mx-auto py-10 w-11/12 flex items-center justify-center flex-wrap gap-5">
-                {products.map(product => (
-                    <ProductCard
-                        key={product._id}
-                        product={product}
-                    />
-                ))}
+            <div className="mx-auto py-10 w-11/12">
+                {/* Products List */}
+                <div className="flex items-center justify-center flex-wrap gap-5">
+                    {products.map(product => (
+                        <ProductCard
+                            key={product._id}
+                            product={product}
+                        />
+                    ))}
+                </div>
+
+                {/* Pagination Component */}
+                <Pagination currentPage={page} totalPages={totalPages} />
             </div>
         );
     } catch (error) {
