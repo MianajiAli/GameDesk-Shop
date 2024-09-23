@@ -23,7 +23,7 @@ export default function Page({ params }) {
     }, [id]);
 
     const fetchProduct = async () => {
-        const token = localStorage.getItem('Authorization');
+        const token = "token";
 
         try {
             const response = await fetch(`http://localhost:8000/api/products/${id}`, {
@@ -91,7 +91,7 @@ export default function Page({ params }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem('authToken');
+        const token = "token";
         const productData = {
             ...formData,
             price: parseFloat(formData.price),

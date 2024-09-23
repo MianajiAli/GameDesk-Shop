@@ -1,42 +1,54 @@
-
-export default async function api(url, token) {
+export default async function api(url, method = "GET", body = null, token = null) {
     let data;
     try {
-        const response = await fetch(`${process.env.BACKEND_API_URL}${url}`, {
-            method: 'GET',
+        // Define the fetch options
+        const options = {
+            method: method,
             headers: {
-                // 'Authorization': `Bearer ${token}`, // Use the passed token
                 'Content-Type': 'application/json',
             },
             cache: 'no-store'
-        });
+        };
 
-
-        switch (response.status) {
-            case 200:
-                break
-            case 201:
-                break
-            case 400:
-                return { error: 'Bad Request' };
-            case 403:
-                return { error: 'Forbidden' };
-            case 404:
-                return { error: 'Not Found' };
-            case 500:
-                return { error: 'Internal Server Error' };
-            case 503:
-                return { error: 'Service Unavailable' };
-            default:
-                throw new Error('Network response was not ok.');
+        // Add body if it's not a GET request
+        if (method !== 'GET' && body) {
+            options.body = JSON.stringify(body);
         }
 
-        // If the response is ok, parse the JSON data
-        data = await response.json();
+        // Add Authorization header if token is provided
+        if (token) {
+            options.headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        // Make the API request
+        const response = await fetch(`${process.env.BACKEND_API_URL}${url}`, options);
+
+        // Check for response status
+        switch (response.status) {
+            case 200:
+            case 201:
+                // Parse and return JSON data
+                data = await response.json();
+                break;
+            case 400:
+                return { error: 'Bad Request: The request was invalid or cannot be otherwise served.' };
+            case 401:
+                return { error: 'Unauthorized: Access is denied due to invalid credentials.' };
+            case 403:
+                return { error: 'Forbidden: You don’t have permission to access this resource.' };
+            case 404:
+                return { error: 'Not Found: The requested resource could not be found.' };
+            case 500:
+                return { error: 'Internal Server Error: The server encountered an error and could not complete your request.' };
+            case 503:
+                return { error: 'Service Unavailable: The server is currently unable to handle the request due to maintenance or overloading.' };
+            default:
+                return { error: `Unexpected Error: Received status code ${response.status}.` };
+        }
     } catch (err) {
-        // Log and return the error message
+        // Catch any network errors or unexpected issues
         console.error('Fetch error:', err);
-        return { error: err.message };
+        return { error: `Fetch Error: ${err.message}. Please check your network connection or contact support.` };
     }
 
     // Return the parsed data

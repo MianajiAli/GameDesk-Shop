@@ -19,19 +19,52 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format'], // Simple regex for international phone numbers
     },
     role: {
         type: String,
         enum: ['customer', 'admin'],
         default: 'customer',
     },
+    addresses: [{
+        street: String,
+        city: String,
+        state: String,
+        zipCode: String,
+        country: String,
+    }],
+    status: {
+        type: String,
+        enum: ['active', 'inactive', 'banned'],
+        default: 'active',
+    },
+    dateOfBirth: {
+        type: Date,
+        // No `required` field here, making it optional
+    },
+    profilePicture: {
+        type: String,
+        default: 'default.jpg', // Default profile picture URL
+    },
+    dateOfRegistration: {
+        type: Date,
+        default: Date.now,
+    },
+    lastLogin: {
+        type: Date,
+    },
+    twoFactorEnabled: {
+        type: Boolean,
+        default: false,
+    },
+    notificationPreferences: {
+        email: { type: Boolean, default: true },
+        sms: { type: Boolean, default: false },
+    },
 }, { timestamps: true });
 
 // Hash password before saving
 UserSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
-    // Use 12 salt rounds instead of 10 for stronger hashing
     this.password = await bcrypt.hash(this.password, 12);
     next();
 });

@@ -2,11 +2,10 @@ const express = require('express');
 const connectDB = require('./database/db');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes'); // Import cart routes
 // const orderRoutes = require('./routes/orderRoutes');
 // const paymentRoutes = require('./routes/paymentRoutes');
-const cartRoutes = require('./routes/cartRoutes'); // Import cart routes
 const dotEnv = require('dotenv');
-const cors = require('cors');
 
 const setHeaders = require("./middlewares/headers.middlewares.js");
 const errorHandler = require("./middlewares/errors.middlewares.js");

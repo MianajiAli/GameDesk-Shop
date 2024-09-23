@@ -53,8 +53,8 @@ const ProductForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Get the Authorization token from localStorage
-        const token = localStorage.getItem('authToken');
+        // Get the Authorization token from 
+        const token = "token";
 
         // Prepare the data to be sent
         const productData = {
