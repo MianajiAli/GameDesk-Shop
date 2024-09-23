@@ -1,11 +1,8 @@
-// apiClient.js
 "use client";
 
 import { toast } from 'react-toastify';
 
-export default async function apiClient(url, method = 'GET', body = null) {
-    const token = localStorage.getItem('authToken');
-
+const apiClient = async (url, method = 'GET', body = null, token) => {
     const options = {
         method,
         headers: {
@@ -20,33 +17,27 @@ export default async function apiClient(url, method = 'GET', body = null) {
 
     try {
         const response = await fetch(`http://localhost:8000${url}`, options);
+        const status = { code: response.status, ok: response.ok }; // Capture the status code
 
-        if (response.ok) {
-            return await response.json(); // Return the response data as JSON
-        } else {
-            // Handle specific response statuses
-            switch (response.status) {
-                case 400:
-                    toast.error('Bad Request');
-                    return { error: 'Bad Request' };
-                case 403:
-                    toast.error('Forbidden');
-                    return { error: 'Forbidden' };
-                case 404:
-                    toast.error('Not Found');
-                    return { error: 'Not Found' };
-                case 500:
-                    toast.error('Internal Server Error');
-                    return { error: 'Internal Server Error' };
-                case 503:
-                    toast.error('Service Unavailable');
-                    return { error: 'Service Unavailable' };
-                default:
-                    throw new Error('Network response was not ok.');
-            }
+        // Handle specific response statuses
+        switch (status.code) {
+            case 503:
+                toast.error('Service Unavailable');
+                return { error: 'Service Unavailable', status };
+            default:
+                // Try to parse the response body as JSON
+                try {
+                    const data = await response.json();
+
+                    return { data, status };
+                } catch (jsonError) {
+                    return { error: 'Failed to parse JSON response', status };
+                }
         }
     } catch (error) {
-        toast.error(`Error: ${error.message}`);
-        return { error: error.message };
+        toast.error(`Fetch Error: ${error.message}`);
+        return { error: error.message, status: 'unknown' };
     }
-}
+};
+
+export default apiClient; // Ensure this is a default export

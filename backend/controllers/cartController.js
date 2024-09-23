@@ -2,19 +2,19 @@ const Cart = require('../models/cartModel');
 const Product = require('../models/productModel');
 const mongoose = require('mongoose');
 
-
 // Get cart by user ID
 exports.getCartByUserId = async (req, res) => {
     const userId = req.userId;
 
     try {
         const cart = await Cart.findOne({ user: userId }).populate('items.product');
-        if (!cart) return res.status(404).json({ message: 'Cart not found' });
+        if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد' });
         res.status(200).json(cart);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching cart', error: error.message });
+        res.status(500).json({ message: 'خطا در دریافت سبد خرید', error: error.message });
     }
 };
+
 // Add item to cart with product ID validation
 exports.addItemToCart = async (req, res) => {
     const userId = req.userId;
@@ -22,23 +22,23 @@ exports.addItemToCart = async (req, res) => {
 
     try {
         if (!productId || quantity === undefined) {
-            return res.status(400).json({ message: 'Product ID and quantity are required.' });
+            return res.status(400).json({ message: 'شناسه محصول و تعداد مورد نیاز است.' });
         }
 
         // Validate the format of productId
         if (!mongoose.Types.ObjectId.isValid(productId)) {
-            return res.status(400).json({ message: 'Invalid Product ID format.' });
+            return res.status(400).json({ message: 'فرمت شناسه محصول نامعتبر است.' });
         }
 
         // Check if the product exists
         const product = await Product.findById(productId);
         if (!product) {
-            return res.status(404).json({ message: 'Product not found.' });
+            return res.status(404).json({ message: 'محصول پیدا نشد.' });
         }
 
         // Check if requested quantity exceeds stock
         if (quantity > product.stock) {
-            return res.status(400).json({ message: `Insufficient stock. Available: ${product.stock}` });
+            return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
         }
 
         let cart = await Cart.findOne({ user: userId }) || new Cart({ user: userId, items: [] });
@@ -56,7 +56,7 @@ exports.addItemToCart = async (req, res) => {
 
             // Check if adding quantity exceeds stock
             if (newQuantity > product.stock) {
-                return res.status(400).json({ message: `Insufficient stock. Available: ${product.stock}` });
+                return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
             }
 
             existingItem.quantity = newQuantity; // Update quantity if attributes match
@@ -66,11 +66,12 @@ exports.addItemToCart = async (req, res) => {
         }
 
         await cart.save();
-        res.status(200).json({ message: 'Item added to cart', cart });
+        res.status(200).json({ message: 'آیتم به سبد خرید اضافه شد', cart });
     } catch (error) {
-        res.status(500).json({ message: 'Error adding item to cart', error: error.message });
+        res.status(500).json({ message: 'خطا در اضافه کردن آیتم به سبد خرید', error: error.message });
     }
 };
+
 
 // Update item quantity in cart with attributes
 exports.updateItemQuantity = async (req, res) => {
@@ -78,12 +79,30 @@ exports.updateItemQuantity = async (req, res) => {
     const { productId, quantity, attributes } = req.body; // Include attributes
 
     try {
+        // Validate required fields
         if (!productId || quantity === undefined) {
-            return res.status(400).json({ message: 'Product ID and quantity are required.' });
+            return res.status(400).json({ message: 'شناسه محصول و تعداد مورد نیاز است.' });
         }
 
+        // Validate that quantity is a positive integer
+        if (!Number.isInteger(quantity) || quantity <= 0) {
+            return res.status(400).json({ message: 'تعداد باید یک عدد صحیح مثبت باشد.' });
+        }
+
+        // Validate the format of productId
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            return res.status(400).json({ message: 'فرمت شناسه محصول نامعتبر است.' });
+        }
+
+        // Check if the product exists
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({ message: 'محصول پیدا نشد.' });
+        }
+
+        // Check if the cart exists
         const cart = await Cart.findOne({ user: userId });
-        if (!cart) return res.status(404).json({ message: 'Cart not found' });
+        if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد' });
 
         const itemAttributes = attributes || []; // Use empty array if attributes are not provided
 
@@ -93,22 +112,25 @@ exports.updateItemQuantity = async (req, res) => {
             JSON.stringify(item.attributes) === JSON.stringify(itemAttributes)
         );
 
-        if (!item) return res.status(404).json({ message: 'Item not found in cart' });
+        if (!item) return res.status(404).json({ message: 'آیتم در سبد خرید پیدا نشد' });
 
         // Check if the new quantity exceeds the stock
         if (quantity > product.stock) {
-            return res.status(400).json({ message: `Insufficient stock. Available: ${product.stock}` });
+            return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
         }
 
-        item.quantity = quantity; // Update quantity
+        // Update the item's quantity in the cart
+        item.quantity = quantity;
+
+        // Save the updated cart
         await cart.save();
-        res.status(200).json({ message: 'Item quantity updated', cart });
+
+        res.status(200).json({ message: 'تعداد آیتم بروزرسانی شد', cart });
     } catch (error) {
-        res.status(500).json({ message: 'Error updating item quantity', error: error.message });
+        console.error(error);
+        res.status(500).json({ message: 'خطا در بروزرسانی تعداد آیتم', error: error.message });
     }
 };
-
-
 
 // Delete item from cart
 exports.deleteItemFromCart = async (req, res) => {
@@ -117,11 +139,11 @@ exports.deleteItemFromCart = async (req, res) => {
 
     try {
         if (!productId) {
-            return res.status(400).json({ message: 'Product ID is required.' });
+            return res.status(400).json({ message: 'شناسه محصول مورد نیاز است.' });
         }
 
         const cart = await Cart.findOne({ user: userId });
-        if (!cart) return res.status(404).json({ message: 'Cart not found' });
+        if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد' });
 
         const itemAttributes = attributes || []; // Use empty array if attributes are not provided
 
@@ -131,12 +153,11 @@ exports.deleteItemFromCart = async (req, res) => {
         );
 
         await cart.save();
-        res.status(200).json({ message: 'Item removed from cart', cart });
+        res.status(200).json({ message: 'آیتم از سبد خرید حذف شد', cart });
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting item from cart', error: error.message });
+        res.status(500).json({ message: 'خطا در حذف آیتم از سبد خرید', error: error.message });
     }
 };
-
 
 // Clear cart
 exports.clearCart = async (req, res) => {
@@ -144,13 +165,13 @@ exports.clearCart = async (req, res) => {
 
     try {
         const cart = await Cart.findOne({ user: userId });
-        if (!cart) return res.status(404).json({ message: 'Cart not found' });
+        if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد' });
 
         cart.items = []; // Clear items
         await cart.save();
-        res.status(200).json({ message: 'Cart cleared successfully', cart });
+        res.status(200).json({ message: 'سبد خرید با موفقیت خالی شد', cart });
     } catch (error) {
-        res.status(500).json({ message: 'Error clearing cart', error: error.message });
+        res.status(500).json({ message: 'خطا در خالی کردن سبد خرید', error: error.message });
     }
 };
 
@@ -161,6 +182,6 @@ exports.getAllCarts = async (req, res) => {
         const carts = await Cart.find().populate('items.product');
         res.status(200).json(carts);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching carts', error: error.message });
+        res.status(500).json({ message: 'خطا در دریافت سبدهای خرید', error: error.message });
     }
 };

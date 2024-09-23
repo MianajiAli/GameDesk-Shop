@@ -4,10 +4,9 @@ const generateToken = require('../utils/generateToken');
 // User Registration
 exports.register = [
     async (req, res) => {
-        const { name, email, password, phoneNumber } = req.body;
-
+        const { name, password, phoneNumber } = req.body;
         // Check for missing fields
-        if (!name || !email || !password || !phoneNumber) {
+        if (!name || !password || !phoneNumber) {
             return res.status(400).json({ message: 'همه فیلد ها الزامی می باشند' });
         }
 
@@ -23,15 +22,14 @@ exports.register = [
 
         try {
             // Check if email or phone number already exists
-            const emailExists = await User.findOne({ email });
             const phoneExists = await User.findOne({ phoneNumber });
 
-            if (emailExists || phoneExists) {
-                return res.status(400).json({ message: 'کاربری با این ایمیل یا شماره تلفن موجود می باشد' });
+            if (phoneExists) {
+                return res.status(400).json({ message: 'کاربری با این شماره تلفن موجود می باشد' });
             }
 
             // Create and save the user
-            const user = new User({ name, email, password, phoneNumber });
+            const user = new User({ name, password, phoneNumber });
             await user.save();
 
             // Send response with token
@@ -40,7 +38,6 @@ exports.register = [
                 token: generateToken(user),
                 user: {
                     name: user.name,
-                    email: user.email,
                     role: user.role,
                     phoneNumber: user.phoneNumber,
                     profilePicture: user.profilePicture,
@@ -57,16 +54,16 @@ exports.register = [
 // User Login
 exports.login = [
     async (req, res) => {
-        const { email, password } = req.body;
+        const { phoneNumber, password } = req.body;
 
         // Check for missing fields
-        if (!email || !password) {
+        if (!phoneNumber || !password) {
             return res.status(400).json({ message: 'همه فیلد ها الزامی می باشند' });
         }
 
         try {
             // Check if the user exists
-            const user = await User.findOne({ email });
+            const user = await User.findOne({ phoneNumber });
 
             // Verify password
             if (user && (await user.matchPassword(password))) {
@@ -78,7 +75,7 @@ exports.login = [
                     token: generateToken(user),
                     user: {
                         name: user.name,
-                        email: user.email,
+                        phoneNumber: user.phoneNumber,
                         role: user.role,
                         profilePicture: user.profilePicture,
                         status: user.status,

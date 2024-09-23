@@ -8,7 +8,6 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
         unique: true,
     },
     password: {
@@ -43,7 +42,7 @@ const UserSchema = new mongoose.Schema({
     },
     profilePicture: {
         type: String,
-        default: 'default.jpg', // Default profile picture URL
+        default: '/assets/default.jpg', // Default profile picture URL
     },
     dateOfRegistration: {
         type: Date,
