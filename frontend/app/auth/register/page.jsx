@@ -24,6 +24,8 @@ export default function Register() {
                         localStorage.setItem('email', data.user.email);
                         localStorage.setItem('role', data.user.role);
                         toast.success("خوش آمدید");
+                        break;
+
                     case 400:
                         console.log(status, data, data.message)
 

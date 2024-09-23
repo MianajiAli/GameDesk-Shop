@@ -26,6 +26,7 @@ const apiClient = async (url, method = 'GET', body = null, token) => {
                     console.log("User is not on /auth/login or /auth/register");
                     window.location.href = '/auth/login';
                 }
+                break
             case 503:
                 toast.error('Service Unavailable');
                 return { error: 'Service Unavailable', status };
@@ -45,4 +46,4 @@ const apiClient = async (url, method = 'GET', body = null, token) => {
     }
 };
 
-export default apiClient; // Ensure this is a default export
+export default apiClient;

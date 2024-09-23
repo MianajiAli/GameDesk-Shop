@@ -21,7 +21,7 @@ export default function Page() {
                         localStorage.setItem('phone', data.user.phone);
                         localStorage.setItem('role', data.user.role);
                         toast.success("خوش آمدید");
-                        console.log(localStorage)
+                        break;
                     case 400:
 
                         toast.error(data.message); // Display the error message from the response

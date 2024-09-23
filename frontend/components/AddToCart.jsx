@@ -5,12 +5,13 @@ import { toast } from 'react-toastify';
 
 //TODO: Add attr from props and pass ti to api
 const AddToCart = ({ productId, count }) => {
+    const token = localStorage.getItem('authToken')
     const handleAddToCart = async () => {
         try {
             const response = await apiClient("/api/cart", "POST", {
                 productId: productId,
                 quantity: count,
-            });
+            }, token);
             if (!response.error) {
                 // Optionally handle success, e.g., show a message or update state
                 toast.success("Product added to cart successfully")
