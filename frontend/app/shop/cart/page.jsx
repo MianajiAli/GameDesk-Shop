@@ -9,15 +9,11 @@ export default function CartComponent() {
 
     useEffect(() => {
         // Make the API request within the useEffect, which runs only on the client side
-        apiClient("/api/auth/register", "POST", {
-            name,
-            phoneNumber: phone,
-            email,
-            password,
-        })
+        apiClient("/api/cart", "GET")
             .then(response => {
                 if (response.ok) {
-                    toast.success(response.message);
+                    console.log(response)
+                    setCartData(response)
                 }
                 else {
                     toast.error(response.message);

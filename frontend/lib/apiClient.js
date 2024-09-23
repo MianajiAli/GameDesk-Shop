@@ -1,7 +1,6 @@
 "use client";
 
 import { toast } from 'react-toastify';
-
 const apiClient = async (url, method = 'GET', body = null, token) => {
     const options = {
         method,
@@ -21,6 +20,12 @@ const apiClient = async (url, method = 'GET', body = null, token) => {
 
         // Handle specific response statuses
         switch (status.code) {
+            case 401:
+                if (window.location.pathname !== '/auth/login' && window.location.pathname !== '/auth/register') {
+                    // The user is not on the login or register page
+                    console.log("User is not on /auth/login or /auth/register");
+                    window.location.href = '/auth/login';
+                }
             case 503:
                 toast.error('Service Unavailable');
                 return { error: 'Service Unavailable', status };

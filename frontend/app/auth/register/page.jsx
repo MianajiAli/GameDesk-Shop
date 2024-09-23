@@ -12,20 +12,28 @@ export default function Register() {
     const handleRegister = () => {
         apiClient("/api/auth/register", "POST", {
             name,
-            phoneNumber: phone,
+            phone: phone,
             email,
             password,
         })
-            .then(({ data, error, status }) => {
+            .then(({ data, status }) => {
                 switch (status.code) {
+                    case 201:
+                        localStorage.setItem('authToken', data.token);
+                        localStorage.setItem('name', data.user.name);
+                        localStorage.setItem('email', data.user.email);
+                        localStorage.setItem('role', data.user.role);
+                        toast.success("خوش آمدید");
                     case 400:
-                        console.log(status, data)
+                        console.log(status, data, data.message)
 
-                        toast.error(error[0]); // Display the error message from the response
+                        toast.error(data.message); // Display the error message from the response
 
                         break;
 
                     default:
+                        toast.error(data.message); // Display the error message from the response
+
                         break;
                 }
 
