@@ -1,5 +1,4 @@
-import Link from "next/link"; // Import Link for navigation
-import AddToCart from "@/components/AddToCart";
+import AddToCart from "@/components/cart/AddToCart";
 import api from "@/lib/api";
 
 export default async function Page({ params }) {
@@ -34,7 +33,7 @@ export default async function Page({ params }) {
                     </p>
                 )}
 
-                <AddToCart productId={_id} count={1} />
+                <AddToCart productId={_id} quantity={1} >add</AddToCart>
 
                 {/* Map additional attributes if available */}
                 {attributes && attributes.length > 0 && (
@@ -46,7 +45,7 @@ export default async function Page({ params }) {
                                 <li key={index}>
                                     <strong>{attribute.title}:</strong>
                                     <ul>
-                                        {attribute.values.map((attr, index) => <li key={index}>{attr}</li>)}
+                                        {attribute.values.map((attr, i) => <li key={i}>{attr}</li>)}
                                     </ul>
                                 </li>
                             ))}

@@ -2,10 +2,8 @@
 import { useEffect, useState } from 'react';
 import apiClient from '@/lib/apiClient';
 import { toast } from 'react-toastify';
-import RemoveFromCart from '@/components/RemoveFromCart';
 
 export default function Page() {
-    // State to store the cart data
     const [cartData, setCartData] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -41,21 +39,20 @@ export default function Page() {
     return (
         <div>
             <h2>Cart Data</h2>
-            {console.log(11, cartData.length)}
-            <div className="w-10/12 mx-auto flex flex-col gap-5">
-
-                {cartData.length > 0 ? cartData.map((item, index) =>
-                    <div dir="rtl" className="bg-black/5 rounded-md py-1 px-5 flex flex-row gap-5">
-                        <p>{index + 1}</p>
-                        <p>{item.product.name}</p>
-                        <p>{item.product.price}</p>
-                        <p>{item.product.discount}</p>
-                        <p>{item.product.finalPrice}</p>
-                        <p>{item.quantity}</p>
-                        <p>{item.itemTotal}</p>
-                    </div>) : "no"}
-                <p>مجموع : {totalPrice}</p>
-            </div>
-        </div>
+            {cartData.length > 0 ?
+                <div className="w-10/12 mx-auto flex flex-col gap-3">
+                    {cartData.map((item, index) =>
+                        <div key={index} dir="rtl" className="bg-black/5 rounded-md py-1 px-5 flex flex-row gap-5">
+                            <p>{index + 1}</p>
+                            <p>{item.product.name}</p>
+                            <p>{item.product.price}</p>
+                            <p>{item.product.discount}%</p>
+                            <p>{item.product.finalPrice}</p>
+                            <p>{item.quantity}adad</p>
+                            <p>{item.itemTotal}</p>
+                        </div>)}
+                    <p> مجموع : {totalPrice}</p>
+                </div> : "no"}
+        </div >
     );
 }
