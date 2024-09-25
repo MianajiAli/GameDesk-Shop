@@ -46,6 +46,11 @@ const CartSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    status: {
+        type: String,
+        enum: ['active', 'abandoned', 'ordered', 'expired'], // Define possible statuses
+        default: 'active' // Default status when the cart is created
+    }
 }, { timestamps: true });
 
 // Add a pre-save hook to calculate item totals and total price

@@ -3,7 +3,7 @@ const connectDB = require('./database/db');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes'); // Import cart routes
-// const orderRoutes = require('./routes/orderRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 // const paymentRoutes = require('./routes/paymentRoutes');
 const dotEnv = require('dotenv');
 
@@ -30,7 +30,7 @@ app.use(setHeaders);
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
-// app.use('/api/orders', orderRoutes);
+app.use('/api/orders', orderRoutes);
 // app.use('/api/payments', paymentRoutes);
 // Error Handler
 app.use(errorHandler)

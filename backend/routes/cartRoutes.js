@@ -26,6 +26,7 @@ router.delete('/clear', protect, clearCart); // Clear cart
 
 // Admin route to see all carts
 router.get('/all',
+    protect, admin,
     getAllCarts); // Get all carts (Admin only)
 
 module.exports = router;

@@ -2,6 +2,9 @@ const Cart = require('../models/cartModel');
 const Product = require('../models/productModel');
 const mongoose = require('mongoose');
 
+// Helper function to check if the cart is active
+const isCartActive = (cart) => cart && cart.status === 'active';
+
 // Get cart by user ID
 exports.getCartByUserId = async (req, res) => {
     const userId = req.userId;
@@ -15,7 +18,7 @@ exports.getCartByUserId = async (req, res) => {
     }
 };
 
-// Add item to cart with product ID validation
+// Add item to cart with product ID validation (only for active carts)
 exports.addItemToCart = async (req, res) => {
     const userId = req.userId;
     const { productId, quantity, attributes } = req.body;
@@ -41,7 +44,13 @@ exports.addItemToCart = async (req, res) => {
             return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
         }
 
-        let cart = await Cart.findOne({ user: userId }) || new Cart({ user: userId, items: [] });
+        let cart = await Cart.findOne({ user: userId });
+
+        if (cart && !isCartActive(cart)) {
+            return res.status(400).json({ message: 'امکان تغییر در سبد خرید غیرفعال وجود ندارد.' });
+        }
+
+        cart = cart || new Cart({ user: userId, items: [] });
 
         const itemAttributes = attributes || []; // Use empty array if attributes are not provided
 
@@ -72,41 +81,38 @@ exports.addItemToCart = async (req, res) => {
     }
 };
 
-
-// Update item quantity in cart with attributes
+// Update item quantity in cart (only for active carts)
 exports.updateItemQuantity = async (req, res) => {
     const userId = req.userId;
-    const { productId, quantity, attributes } = req.body; // Include attributes
+    const { productId, quantity, attributes } = req.body;
 
     try {
-        // Validate required fields
         if (!productId || quantity === undefined) {
             return res.status(400).json({ message: 'شناسه محصول و تعداد مورد نیاز است.' });
         }
 
-        // Validate that quantity is a positive integer
         if (!Number.isInteger(quantity) || quantity <= 0) {
             return res.status(400).json({ message: 'تعداد باید یک عدد صحیح مثبت باشد.' });
         }
 
-        // Validate the format of productId
         if (!mongoose.Types.ObjectId.isValid(productId)) {
             return res.status(400).json({ message: 'فرمت شناسه محصول نامعتبر است.' });
         }
 
-        // Check if the product exists
         const product = await Product.findById(productId);
         if (!product) {
             return res.status(404).json({ message: 'محصول پیدا نشد.' });
         }
 
-        // Check if the cart exists
         const cart = await Cart.findOne({ user: userId });
         if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد' });
 
-        const itemAttributes = attributes || []; // Use empty array if attributes are not provided
+        if (!isCartActive(cart)) {
+            return res.status(400).json({ message: 'امکان تغییر در سبد خرید غیرفعال وجود ندارد.' });
+        }
 
-        // Find the item with matching product and attributes
+        const itemAttributes = attributes || [];
+
         const item = cart.items.find(item =>
             item.product.equals(productId) &&
             JSON.stringify(item.attributes) === JSON.stringify(itemAttributes)
@@ -114,28 +120,23 @@ exports.updateItemQuantity = async (req, res) => {
 
         if (!item) return res.status(404).json({ message: 'آیتم در سبد خرید پیدا نشد' });
 
-        // Check if the new quantity exceeds the stock
         if (quantity > product.stock) {
             return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
         }
 
-        // Update the item's quantity in the cart
         item.quantity = quantity;
 
-        // Save the updated cart
         await cart.save();
-
         res.status(200).json({ message: 'تعداد آیتم بروزرسانی شد', cart });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: 'خطا در بروزرسانی تعداد آیتم', error: error.message });
     }
 };
 
-// Delete item from cart
+// Delete item from cart (only for active carts)
 exports.deleteItemFromCart = async (req, res) => {
     const userId = req.userId;
-    const { productId, attributes } = req.body; // Include attributes
+    const { productId, attributes } = req.body;
 
     try {
         if (!productId) {
@@ -145,9 +146,12 @@ exports.deleteItemFromCart = async (req, res) => {
         const cart = await Cart.findOne({ user: userId });
         if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد' });
 
-        const itemAttributes = attributes || []; // Use empty array if attributes are not provided
+        if (!isCartActive(cart)) {
+            return res.status(400).json({ message: 'امکان حذف آیتم در سبد خرید غیرفعال وجود ندارد.' });
+        }
 
-        // Remove the item with matching product and attributes
+        const itemAttributes = attributes || [];
+
         cart.items = cart.items.filter(item =>
             !(item.product.equals(productId) && JSON.stringify(item.attributes) === JSON.stringify(itemAttributes))
         );
@@ -159,7 +163,7 @@ exports.deleteItemFromCart = async (req, res) => {
     }
 };
 
-// Clear cart
+// Clear cart (only for active carts)
 exports.clearCart = async (req, res) => {
     const userId = req.userId;
 
@@ -167,7 +171,11 @@ exports.clearCart = async (req, res) => {
         const cart = await Cart.findOne({ user: userId });
         if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد' });
 
-        cart.items = []; // Clear items
+        if (!isCartActive(cart)) {
+            return res.status(400).json({ message: 'امکان خالی کردن سبد خرید غیرفعال وجود ندارد.' });
+        }
+
+        cart.items = [];
         await cart.save();
         res.status(200).json({ message: 'سبد خرید با موفقیت خالی شد', cart });
     } catch (error) {
@@ -177,7 +185,6 @@ exports.clearCart = async (req, res) => {
 
 // See all carts (Admin only)
 exports.getAllCarts = async (req, res) => {
-    // Assuming you have a middleware that checks if the user is an admin
     try {
         const carts = await Cart.find().populate('items.product');
         res.status(200).json(carts);
