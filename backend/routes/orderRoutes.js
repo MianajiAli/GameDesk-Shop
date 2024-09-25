@@ -14,15 +14,15 @@ const router = express.Router();
 router.post('/', protect, createOrderFromCart); // Transform cart to order
 
 // Protected route to get a specific order by ID
-router.get('/:orderId', protect, getOrderById); // Get an order by ID
+router.get('/order/:orderId', protect, getOrderById); // Get an order by ID
 
 // Protected route to get all orders for a specific user
 router.get('/', protect, getOrdersByUserId); // Get all orders for the logged-in user
 
 // Admin-only route to update order status (e.g., change to 'Shipped' or 'Delivered')
-router.put('/:orderId/status', protect, admin, updateOrderStatus); // Update order status (admin only)
+router.put('/order/:orderId/status', protect, admin, updateOrderStatus); // Update order status (admin only)
 
 // Admin-only route to get all orders
-router.get('/all', protect, admin, getAllOrders); // Get all orders (admin only)
+router.get('/all', getAllOrders); // Get all orders (admin only)
 
 module.exports = router;

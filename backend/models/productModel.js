@@ -61,7 +61,7 @@ const ProductSchema = new mongoose.Schema({
     },
     productUrl: {
         type: String, // URL for the product page
-        required: true,
+        // required: true,
     },
 }, { timestamps: true });
 

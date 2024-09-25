@@ -1,61 +1,49 @@
 const mongoose = require('mongoose');
+
+// Define the schema for order items
+const OrderItemSchema = new mongoose.Schema({
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        min: 1,
+    },
+    price: {
+        type: Number,
+        required: true, // Final price when the order was placed
+    },
+    attributes: {
+        type: Array, // Product attributes (e.g., color, size, etc.)
+        default: [],
+    }
+});
+
+// Define the Order schema
 const OrderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
-    cart: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cart',
-        required: true,
-    },
+    items: [OrderItemSchema], // Array of order items
     totalPrice: {
         type: Number,
         required: true,
-        min: 0,
     },
-    discountPercentage: {
-        type: Number, // Percentage discount (0-100)
-        min: 0,
-        max: 100,
-        default: 0,
-    },
-    discountAmount: {
-        type: Number, // Flat discount amount (currency)
-        min: 0,
-        default: 0,
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cart', // Reference to the Cart model
+        required: true, // Ensure this field is required if needed
     },
     status: {
         type: String,
-        enum: ['Pending', 'Shipped', 'Delivered', 'Cancelled'],
-        default: 'Pending',
-    },
-    shippingAddress: {
-        type: String
-    },
-    transactionId: {
-        type: String,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
+        enum: ['pending', 'shipped', 'delivered', 'canceled'],
+        default: 'pending',
     },
 }, { timestamps: true });
-
-// To calculate the final price after applying the discount (this is done in the application logic):
-OrderSchema.methods.getFinalPrice = function () {
-    let finalPrice = this.totalPrice;
-
-    if (this.discountPercentage > 0) {
-        finalPrice -= (this.totalPrice * (this.discountPercentage / 100));
-    }
-
-    if (this.discountAmount > 0) {
-        finalPrice -= this.discountAmount;
-    }
-
-    return finalPrice < 0 ? 0 : finalPrice; // Ensure final price is not negative
-};
 
 module.exports = mongoose.model('Order', OrderSchema);

@@ -73,7 +73,9 @@ export default async function Page({ params }) {
                                 </div>
 
                             </div>
-                            <button className=" w-full my-7 py-2 bg-black/80 text-white">افزودن به سبد خرید</button>
+                            <AddToCart productId={product._id} quantity={1}>
+                                <div className=" w-full my-7 py-2 bg-black/80 text-white">افزودن به سبد خرید</div>
+                            </AddToCart>
                         </div>
                     </div>
                 </div >

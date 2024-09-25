@@ -3,7 +3,7 @@ import React from "react";
 import apiClient from "@/lib/apiClient";
 import { toast } from 'react-toastify';
 
-//TODO: Add attr from props and pass ti to api
+//TODO: Add attr from props and pass it to api
 const AddToCart = ({ productId, quantity, children }) => {
     const handleAddToCart = async () => {
         try {

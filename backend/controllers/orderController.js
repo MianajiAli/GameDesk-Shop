@@ -20,7 +20,7 @@ exports.createOrderFromCart = async (req, res) => {
             }
         }
 
-        // Create the order
+        // Create the order with a reference to the cart
         const order = new Order({
             user: userId,
             items: cart.items.map(item => ({
@@ -30,7 +30,16 @@ exports.createOrderFromCart = async (req, res) => {
                 attributes: item.attributes
             })),
             totalPrice: cart.totalPrice,
+            cart: cart._id, // Reference to the cart
             status: 'pending', // Default status when creating an order
+        });
+
+        console.log("Creating order with data:", {
+            user: userId,
+            items: order.items,
+            totalPrice: cart.totalPrice,
+            cart: cart._id, // This should not be undefined
+            status: 'pending',
         });
 
         // Save the order
@@ -49,9 +58,12 @@ exports.createOrderFromCart = async (req, res) => {
 
         res.status(201).json({ message: 'سفارش با موفقیت ثبت شد', order });
     } catch (error) {
+        console.error(error); // Log the error for debugging
         res.status(500).json({ message: 'خطا در ایجاد سفارش', error: error.message });
     }
 };
+
+
 
 // Get a specific order by ID
 exports.getOrderById = async (req, res) => {
