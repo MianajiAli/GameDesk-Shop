@@ -42,22 +42,22 @@ export default async function Page({ params }) {
                                         className=" object-cover bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm  opacity-50 "
                                     />
                                 </div>
-                                <div className=" bg-black/5 w-20 aspect-square">img</div>
-                                <div className=" bg-black/5 w-20 aspect-square">img</div>
-                                <div className=" bg-black/5 w-20 aspect-square">img</div>
+                                <div className=" bg-black/5 w-20 aspect-square"></div>
+                                <div className=" bg-black/5 w-20 aspect-square"></div>
+                                <div className=" bg-black/5 w-20 aspect-square"></div>
                             </div>
                         </div>
                         <div className="w-full min-h-96 flex-1 flex flex-col justify-between py-5 md:py-0 px-0 md:px-10 ">
 
                             <div className='flex flex-col'>
                                 <label className="text-xs text-black/50">{product.category}</label>
-                                <h1 className="text-2xl text-black font-semibold">{product.name}</h1>
+                                <h1 className="text-2xl sm:text-3xl xl:text-4xl text-black font-semibold">{product.name}</h1>
                                 <div className="mt-3 flex items-center  gap-1 *:h-min">
                                     <p className="text-xs line-through opacity-50 font-semibold ">{product.price.toLocaleString()} </p>
                                     <p className="text-lg font-semibold">{product.finalPrice.toLocaleString()} تومان</p>
                                     <span className="bg-red-500 text-white px-2  text-xs">{product.discount}%</span>
                                 </div>
-                                <p className="mt-1 text-black/80">{product.description}</p>
+                                <p className="mt-1 text-lg text-black/70">{product.description}</p>
                                 <div>
                                     {product.attributes && product.attributes.length > 0 && (
                                         <ul className="my-5 flex flex-col gap-1">
