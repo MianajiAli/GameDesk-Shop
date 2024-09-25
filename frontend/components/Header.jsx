@@ -16,7 +16,7 @@ export default function Header() {
     return (
         <>
             {/* Main Navigation */}
-            <div className="bg-black/5 w-full h-12 flex flex-row-reverse justify-between items-center px-5 md:px-10">
+            <div className="bg-white w-full h-12 flex flex-row-reverse justify-between items-center px-5 md:px-10">
                 {/* Brand Name */}
                 <span className="text-2xl md:text-3xl font-bold select-none">آجر شاپ</span>
 
@@ -41,7 +41,7 @@ export default function Header() {
             </div>
 
             {/* User Authentication Links */}
-            <div dir="rtl" className="bg-black/5 w-full h-8 flex flex-row justify-end items-center px-5 md:px-10 gap-1 md:gap-3 text-xs md:text-sm">
+            <div dir="rtl" className="bg-white w-full h-8 flex flex-row justify-end items-center px-5 md:px-10 gap-1 md:gap-3 text-xs md:text-sm">
                 <Link href="/auth/login" className="hover:text-gray-600">ورود
                 </Link>
                 /
