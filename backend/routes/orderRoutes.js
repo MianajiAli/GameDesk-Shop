@@ -1,37 +1,28 @@
 const express = require('express');
-const Order = require('../models/Order');
+const {
+    createOrderFromCart,
+    getOrderById,
+    getOrdersByUserId,
+    updateOrderStatus,
+    getAllOrders,
+} = require('../controllers/orderController'); // Adjust the path as necessary
+const { protect, admin } = require('../middlewares/authMiddleware'); // Protect routes
+
 const router = express.Router();
 
-// Create a new order
-router.post('/', async (req, res) => {
-    try {
-        const { user, cart, totalPrice } = req.body;
-        const newOrder = new Order({ user, cart, totalPrice });
-        await newOrder.save();
-        res.status(201).json(newOrder);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// Protected route to create an order from a cart
+router.post('/', protect, createOrderFromCart); // Transform cart to order
 
-// Get all orders for a user
-router.get('/:userId', async (req, res) => {
-    try {
-        const orders = await Order.find({ user: req.params.userId });
-        res.status(200).json(orders);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// Protected route to get a specific order by ID
+router.get('/:orderId', protect, getOrderById); // Get an order by ID
 
-// Update order status
-router.patch('/:id', async (req, res) => {
-    try {
-        const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.status(200).json(updatedOrder);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// Protected route to get all orders for a specific user
+router.get('/', protect, getOrdersByUserId); // Get all orders for the logged-in user
+
+// Admin-only route to update order status (e.g., change to 'Shipped' or 'Delivered')
+router.put('/:orderId/status', protect, admin, updateOrderStatus); // Update order status (admin only)
+
+// Admin-only route to get all orders
+router.get('/all', protect, admin, getAllOrders); // Get all orders (admin only)
 
 module.exports = router;
