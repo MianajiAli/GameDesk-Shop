@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-800 text-white " dir="rtl">
+        <footer className="bg-black/90 text-white " dir="rtl">
             <div className="py-6 px-10 mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* بخش درباره ما */}
                 <div className="flex flex-col items-center md:items-start">
@@ -39,8 +39,8 @@ const Footer = () => {
             </div>
 
             {/* کپی رایت */}
-            <div className="flex justify-center items-center py-4 bg-gray-900">
-                <p className="text-sm text-gray-500">
+            <div className="flex justify-center items-center py-4 bg-black/30">
+                <p className="text-sm text-white/50">
                     © 2024 تمامی حقوق محفوظ است.
                 </p>
             </div>
