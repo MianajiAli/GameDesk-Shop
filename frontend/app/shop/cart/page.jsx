@@ -14,7 +14,7 @@ export default function Page() {
 
                 if (!token) {
                     window.location.href = '/auth/login';
-                    throw new Error("Authentication token not found");
+                    return console.log("Authentication token not found");
                 }
 
                 const response = await apiClient("/api/cart", "GET", null, token);
@@ -38,6 +38,7 @@ export default function Page() {
 
     return (
         <div>
+
             <h2>Cart Data</h2>
             {cartData.length > 0 ?
                 <div className="w-10/12 mx-auto flex flex-col gap-3">

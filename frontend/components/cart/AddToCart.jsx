@@ -11,7 +11,7 @@ const AddToCart = ({ productId, quantity, children }) => {
 
             if (!token) {
                 window.location.href = '/auth/login';
-                throw new Error("Authentication token not found");
+                return console.log("Authentication not found");
             }
 
             const response = await apiClient("/api/cart", "POST",
@@ -37,7 +37,6 @@ const AddToCart = ({ productId, quantity, children }) => {
 
     return (
         <button onClick={handleAddToCart}>
-
             {children}
         </button>
     );
