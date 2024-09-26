@@ -1,27 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define the schema for order items
-const OrderItemSchema = new mongoose.Schema({
-    product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: true,
-        min: 1,
-    },
-    price: {
-        type: Number,
-        required: true, // Final price when the order was placed
-    },
-    attributes: {
-        type: Array, // Product attributes (e.g., color, size, etc.)
-        default: [],
-    }
-});
-
 // Define the Order schema
 const OrderSchema = new mongoose.Schema({
     user: {
@@ -29,7 +7,6 @@ const OrderSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    items: [OrderItemSchema], // Array of order items
     totalPrice: {
         type: Number,
         required: true,

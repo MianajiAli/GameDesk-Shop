@@ -182,7 +182,37 @@ exports.clearCart = async (req, res) => {
         res.status(500).json({ message: 'خطا در خالی کردن سبد خرید', error: error.message });
     }
 };
+exports.updateCart = async (req, res) => {
+    const userId = req.userId;
+    const { items } = req.body; // Assuming items are passed in the request body
 
+    try {
+        // Find the user's active cart
+        let cart = await Cart.findOne({ user: userId, status: 'active' }).populate('items.product');
+        if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد یا فعال نیست.' });
+
+        // Update cart items logic (add, remove, or update quantity)
+        // ... your existing logic for updating cart items ...
+
+        // Calculate new total price
+        const newTotalPrice = cart.items.reduce((total, item) => total + (item.product.finalPrice * item.quantity), 0);
+
+        // Find the associated order and update its total price if it exists
+        const order = await Order.findOne({ cart: cart._id });
+        if (order) {
+            order.totalPrice = newTotalPrice; // Update total price
+            await order.save();
+        }
+
+        // Save the updated cart
+        await cart.save();
+
+        res.status(200).json({ message: 'سبد خرید با موفقیت بروزرسانی شد', cart });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'خطا در بروزرسانی سبد خرید', error: error.message });
+    }
+};
 // See all carts (Admin only)
 exports.getAllCarts = async (req, res) => {
     try {

@@ -8,7 +8,7 @@ exports.createOrderFromCart = async (req, res) => {
 
     try {
         // Find the user's active cart
-        const cart = await Cart.findOne({ user: userId, status: 'active' }).populate('items.product');
+        let cart = await Cart.findOne({ user: userId, status: 'active' }).populate('items.product');
         if (!cart) return res.status(404).json({ message: 'سبد خرید پیدا نشد یا فعال نیست.' });
 
         // Check stock availability for each item
@@ -20,36 +20,27 @@ exports.createOrderFromCart = async (req, res) => {
             }
         }
 
+        // Calculate total price from the cart items
+        const totalPrice = cart.items.reduce((total, item) => total + (item.product.finalPrice * item.quantity), 0);
+
         // Create the order with a reference to the cart
         const order = new Order({
             user: userId,
-            items: cart.items.map(item => ({
-                product: item.product._id,
-                quantity: item.quantity,
-                price: item.product.finalPrice,
-                attributes: item.attributes
-            })),
-            totalPrice: cart.totalPrice,
+            totalPrice, // Use the calculated total price
             cart: cart._id, // Reference to the cart
             status: 'pending', // Default status when creating an order
-        });
-
-        console.log("Creating order with data:", {
-            user: userId,
-            items: order.items,
-            totalPrice: cart.totalPrice,
-            cart: cart._id, // This should not be undefined
-            status: 'pending',
         });
 
         // Save the order
         await order.save();
 
         // Reduce stock for each product in the order
-        for (const item of order.items) {
-            const product = await Product.findById(item.product);
-            product.stock -= item.quantity;
-            await product.save();
+        for (const item of cart.items) {
+            const product = await Product.findById(item.product._id);
+            if (product) {
+                product.stock -= item.quantity;
+                await product.save();
+            }
         }
 
         // Set the cart status to "ordered" and save it
@@ -63,15 +54,13 @@ exports.createOrderFromCart = async (req, res) => {
     }
 };
 
-
-
 // Get a specific order by ID
 exports.getOrderById = async (req, res) => {
     const { orderId } = req.params;
 
     try {
-        // Find the order by ID and populate the product details
-        const order = await Order.findById(orderId).populate('items.product');
+        // Find the order by ID and populate the cart details
+        const order = await Order.findById(orderId).populate('cart').populate({ path: 'cart.items.product' });
         if (!order) return res.status(404).json({ message: 'سفارش پیدا نشد.' });
 
         res.status(200).json(order);
@@ -85,8 +74,8 @@ exports.getOrdersByUserId = async (req, res) => {
     const userId = req.userId;
 
     try {
-        // Find all orders for the logged-in user
-        const orders = await Order.find({ user: userId }).populate('items.product');
+        // Find all orders for the logged-in user and populate the cart details
+        const orders = await Order.find({ user: userId }).populate('cart').populate({ path: 'cart.items.product' });
         if (!orders.length) return res.status(404).json({ message: 'سفارشی پیدا نشد.' });
 
         res.status(200).json(orders);
@@ -121,10 +110,9 @@ exports.updateOrderStatus = async (req, res) => {
 // Admin: Get all orders
 exports.getAllOrders = async (req, res) => {
     try {
-        // Find all orders and populate the product details
-        const orders = await Order.find().populate('items.product');
+        // Find all orders and populate the cart details
+        const orders = await Order.find().populate('cart').populate({ path: 'cart.items.product' });
         if (!orders.length) return res.status(404).json({ message: 'سفارشی پیدا نشد.' });
-
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json({ message: 'خطا در دریافت سفارشات', error: error.message });
