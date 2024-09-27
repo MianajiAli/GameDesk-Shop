@@ -64,8 +64,8 @@ const ProductsPage = ({ searchParams }) => {
                 <table className="min-w-full bg-white border border-gray-300">
                     <thead>
                         <tr className="bg-gray-200 text-right">
-                            <th className="py-3 px-4 border-b">نام محصول</th>
                             <th className="py-3 px-4 border-b">تصویر</th>
+                            <th className="py-3 px-4 border-b">نام محصول</th>
                             <th className="py-3 px-4 border-b">قیمت</th>
                             <th className="py-3 px-4 border-b">موجودی</th>
                             <th className="py-3 px-4 border-b">دسته بندی</th>
@@ -75,7 +75,6 @@ const ProductsPage = ({ searchParams }) => {
                     <tbody>
                         {products.map(product => (
                             <tr key={product._id} className="hover:bg-gray-100">
-                                <td className="py-2 px-4 border-b text-right">{product.name}</td>
                                 <td className="py-2 px-4 border-b text-right">
                                     <div className="relative w-16 h-16">
                                         <Image
@@ -89,6 +88,7 @@ const ProductsPage = ({ searchParams }) => {
                                         />
                                     </div>
                                 </td>
+                                <td className="py-2 px-4 border-b text-right">{product.name}</td>
                                 <td className="py-2 px-4 border-b text-right">{`$${product.price}`}</td>
                                 <td className="py-2 px-4 border-b text-right">{product.stock}</td>
                                 <td className="py-2 px-4 border-b text-right">{product.category}</td>
