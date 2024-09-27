@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const navItems = [
     { label: 'صفحه اصلی', href: '/' },
@@ -12,6 +12,13 @@ const navItems = [
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [userName, setUserName] = useState(null);
+
+    useEffect(() => {
+        // Access localStorage only after the component mounts (client-side)
+        const storedName = localStorage.getItem('name');
+        setUserName(storedName);
+    }, []);
 
     return (
         <>
@@ -42,14 +49,18 @@ export default function Header() {
 
             {/* User Authentication Links */}
             <div dir="rtl" className="bg-white w-full h-8 flex flex-row justify-end items-center px-5 md:px-10 gap-1 md:gap-3 text-xs md:text-sm">
-                <Link href="/auth/login" className="hover:text-gray-600">ورود
-                </Link>
-                /
-                <Link href="/auth/register" className="hover:text-gray-600">ثبت نام
-                </Link>
-                |
-                <Link href="/auth/logout" className="hover:text-gray-600">خروج
-                </Link>
+                <span> {userName ? 'سلام' + userName : ''}</span>
+                {userName ? (
+                    // Show logout if user is logged in
+                    <Link href="/auth/logout" className="hover:text-gray-600">خروج</Link>
+                ) : (
+                    // Show login/register if user is not logged in
+                    <>
+                        <Link href="/auth/login" className="hover:text-gray-600">ورود</Link>
+                        /
+                        <Link href="/auth/register" className="hover:text-gray-600">ثبت نام</Link>
+                    </>
+                )}
             </div>
         </>
     );
