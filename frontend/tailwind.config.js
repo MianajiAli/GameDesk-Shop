@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // Corrected 'Fonts' to 'fontFamily'
+      fontFamily: {
+        main: ["danaFont", "sans-serif"], // Specify fallback font
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

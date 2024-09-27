@@ -1,4 +1,4 @@
-import AddToCart from "@/components/cart/AddToCart";
+import UpdateCount from "@/components/cart/UpdateCount";
 import api from "@/lib/api";
 import Image from "next/image";
 
@@ -73,9 +73,9 @@ export default async function Page({ params }) {
                                 </div>
 
                             </div>
-                            <AddToCart productId={product._id} quantity={1}>
+                            <UpdateCount productId={product._id} quantity={1} >
                                 <div className=" w-full my-7 py-2 bg-black/80 text-white">افزودن به سبد خرید</div>
-                            </AddToCart>
+                            </UpdateCount>
                         </div>
                     </div>
                 </div >

@@ -4,6 +4,8 @@ import apiClient from '@/lib/apiClient';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
 import Link from 'next/link';
+import UpdateCount from '@/components/cart/UpdateCount';
+import RemoveFromCart from '@/components/cart/RemoveFromCart';
 
 export default function Page() {
     const [cartData, setCartData] = useState([]);
@@ -17,7 +19,7 @@ export default function Page() {
 
                 if (!token) {
                     window.location.href = '/auth/login';
-                    return console.log("توکن احراز هویت یافت نشد");
+                    return console.log("Authentication token not found");
                 }
 
                 const response = await apiClient("/api/cart", "GET", null, token);
@@ -27,18 +29,23 @@ export default function Page() {
                     setCartData(data.items || []);
                     setTotalPrice(data.totalPrice);
                 } else {
-                    toast.error(data.message || "خطایی در بارگذاری اطلاعات سبد خرید به وجود آمد.");
+                    toast.error(data.message || "Error loading cart data.");
                 }
             } catch (error) {
-                console.error("خطا:", error);
-                toast.error(error.message || "بارگذاری اطلاعات سبد خرید با شکست مواجه شد. لطفاً دوباره تلاش کنید.");
+                console.error("Error:", error);
+                toast.error(error.message || "Failed to load cart data. Please try again.");
             }
         };
 
         fetchData();
     }, []);
+    const handleRemoveFromCart = (productId) => {
+        const updatedCartData = cartData.filter(item => item.product._id !== productId);
+        setCartData(updatedCartData);
+        setTotalPrice(updatedCartData.reduce((total, item) => total + item.itemTotal, 0));
+    };
 
-    const handleQuantityChange = (index, increment) => {
+    const updateCartQuantity = (index, increment) => {
         const newCartData = [...cartData];
         const currentItem = newCartData[index];
         currentItem.quantity += increment;
@@ -48,9 +55,10 @@ export default function Page() {
 
         currentItem.itemTotal = currentItem.product.finalPrice * currentItem.quantity;
 
+        // Update state to reflect new cart data
         setCartData(newCartData);
-
-        // Optionally, you could update this quantity on the server
+        // Update total price
+        setTotalPrice(newCartData.reduce((total, item) => total + item.itemTotal, 0));
     };
 
     const handleVoucherChange = (e) => {
@@ -58,58 +66,57 @@ export default function Page() {
     };
 
     const applyVoucher = () => {
-        // Call your API to apply voucher here
-        console.log('کد تخفیف اعمال شد:', voucher);
+        console.log('Voucher code applied:', voucher);
     };
 
     return (
         <div>
-            {cartData.length > 0 ?
-                <section className="bg-white py-8 antialiased md:py-16">
+            {cartData.length <= 0 ? (
+                <div className="w-full h-[80vh] flex justify-center items-center flex-col gap-2">
+                    <h2 className="text-3xl font-semibold">سبد خرید خالی است</h2>
+                    <Link className="hover:underline opacity-80" href="/shop/1">بازگشت به فروشگاه</Link>
+                </div>
+            ) : (
+                <section dir="rtl" className="bg-white py-8 antialiased md:py-16">
                     <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
                         <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">سبد خرید</h2>
-
-                        <div dir="rtl" className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+                        <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
                             <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
                                 <div className="space-y-6">
                                     {cartData.map((item, index) => (
                                         <div key={index} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6">
                                             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                                                <a href="#" className="shrink-0 md:order-1">
-                                                    <div className="h-20 w-20 relative" >
+                                                <Link href={`${item.product.productUrl}`} className="shrink-0 md:order-1">
+                                                    <div className="h-20 w-20 relative">
                                                         <Image
                                                             src={`http://localhost:8000${item.product.images[0]}`} // Ensure the URL includes the protocol
                                                             alt={item.product.imageAlt}
                                                             fill
-                                                            placeholder='empty' // Optional: change to 'blur' for a blurred placeholder
+                                                            placeholder='empty'
                                                             priority={true}
                                                             sizes="100%"
                                                             className="rounded-lg object-cover bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm"
                                                         />
                                                     </div>
-                                                </a>
+                                                </Link>
 
                                                 <div className="flex items-center justify-between md:order-3 md:justify-end">
                                                     <div className="flex items-center">
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => handleQuantityChange(index, -1)}
-                                                            className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200"
-                                                        >
-                                                            <svg className="h-2.5 w-2.5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
-                                                            </svg>
-                                                        </button>
+                                                        <UpdateCount productId={item.product._id} quantity={-1} onUpdate={() => updateCartQuantity(index, -1)}>
+                                                            <button type="button" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200">
+                                                                <svg className="h-2.5 w-2.5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
+                                                                </svg>
+                                                            </button>
+                                                        </UpdateCount>
                                                         <input type="text" className="w-10 text-center text-sm font-medium text-gray-900" value={item.quantity} readOnly />
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => handleQuantityChange(index, 1)}
-                                                            className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200"
-                                                        >
-                                                            <svg className="h-2.5 w-2.5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
-                                                            </svg>
-                                                        </button>
+                                                        <UpdateCount productId={item.product._id} quantity={1} onUpdate={() => updateCartQuantity(index, 1)}>
+                                                            <button type="button" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200">
+                                                                <svg className="h-2.5 w-2.5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
+                                                                </svg>
+                                                            </button>
+                                                        </UpdateCount>
                                                     </div>
                                                     <div className="text-end md:order-4 md:w-32">
                                                         <p className="text-base font-bold text-gray-900">{item.itemTotal} تومان</p>
@@ -117,26 +124,23 @@ export default function Page() {
                                                 </div>
 
                                                 <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                                    <a href="#" className="text-base font-medium text-gray-900 hover:underline">{item.product.name}</a>
+                                                    <Link href={`${item.product.productUrl}`} className="text-base font-medium text-gray-900 hover:underline">{item.product.name}</Link>
                                                     <div className="flex items-center gap-4">
                                                         <button className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline">
-                                                            <svg className="me-1.5 h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                                            </svg>
-                                                            اضافه به علاقه مندی ها
+                                                            مشاهده محصول
                                                         </button>
-
-                                                        <button className="inline-flex items-center text-sm font-medium text-red-600 hover:underline">
-                                                            <svg className="me-1.5 h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L17.94 6M18 18L6.06 6" />
-                                                            </svg>
-                                                            حذف
-                                                        </button>
+                                                        {/* Add the RemoveFromCart button here */}
+                                                        <RemoveFromCart productId={item.product._id} onRemove={handleRemoveFromCart}>
+                                                            <button className="inline-flex items-center text-sm font-medium text-red-600 opacity-80 hover:opacity-100 hover:underline">
+                                                                حذف
+                                                            </button>
+                                                        </RemoveFromCart>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     ))}
+
                                 </div>
                             </div>
 
@@ -152,7 +156,8 @@ export default function Page() {
                                             </dl>
                                         </div>
 
-                                        <a href="#" className="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">ادامه به پرداخت</a>
+                                        <a href="#" className="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">بروزرسانی سبد خرید</a>
+                                        <a href="#" className="flex w-full items-center justify-center rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300">تکمیل سفارش</a>
                                     </div>
 
                                     <div className="space-y-4">
@@ -182,13 +187,8 @@ export default function Page() {
                             </div>
                         </div>
                     </div>
-                </section> : <div className="w-full h-[80vh] flex justify-center items-center flex-col gap-2">
-                    <span className=" text-3xl font-semibold">سبد خرید خالی است</span>
-                    <Link className="underline" href="/shop/1">بازگشت به فروشگاه</Link >
-                </div>
-
-            }
-
+                </section>
+            )}
         </div>
     );
 }

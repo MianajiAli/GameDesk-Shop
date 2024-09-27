@@ -3,8 +3,7 @@ import React from "react";
 import apiClient from "@/lib/apiClient";
 import { toast } from 'react-toastify';
 
-//TODO: Add attr from props and pass it to api
-const AddToCart = ({ productId, quantity, children }) => {
+const UpdateCount = ({ productId, quantity, onUpdate = () => { }, children }) => {
     const handleAddToCart = async () => {
         try {
             const token = localStorage.getItem('authToken');
@@ -14,24 +13,24 @@ const AddToCart = ({ productId, quantity, children }) => {
                 return console.log("Authentication not found");
             }
 
-            const response = await apiClient("/api/cart", "POST",
-                {
-                    productId: productId,
-                    quantity: quantity
-                }
-                , token);
+            const response = await apiClient("/api/cart", "POST", {
+                productId,
+                quantity
+            }, token);
+
             const { data, status } = response;
 
             if (status.code === 200) {
-
-                toast.success(data.message || "ok");
-
+                toast.success(data.message || "Quantity updated successfully");
+                // Call the onUpdate callback only on successful update
+                onUpdate(quantity);
             } else {
-                toast.error(data.message || "An error occurred while fetching cart data.");
+                toast.error(data.message || "An error occurred while updating quantity.");
             }
         } catch (error) {
             console.error("Error:", error);
-            toast.error(error.message || "Failed to fetch cart data. Please try again.");
+            toast.error(error.message || "Failed to update quantity. Please try again.");
+            // Ensure onUpdate is not called on error
         }
     };
 
@@ -42,4 +41,4 @@ const AddToCart = ({ productId, quantity, children }) => {
     );
 };
 
-export default AddToCart;
+export default UpdateCount;

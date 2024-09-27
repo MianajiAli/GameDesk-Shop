@@ -24,24 +24,21 @@ exports.addItemToCart = async (req, res) => {
     const { productId, quantity, attributes } = req.body;
 
     try {
-        if (!productId || quantity === undefined) {
+        // Validate input
+        if (productId === undefined || quantity === undefined) {
             return res.status(400).json({ message: 'شناسه محصول و تعداد مورد نیاز است.' });
         }
 
-        // Validate the format of productId
-        if (!mongoose.Types.ObjectId.isValid(productId)) {
+        // Validate the format of productId (expecting a number, convert to string for MongoDB)
+        const productIdString = productId.toString();
+        if (!mongoose.Types.ObjectId.isValid(productIdString)) {
             return res.status(400).json({ message: 'فرمت شناسه محصول نامعتبر است.' });
         }
 
         // Check if the product exists
-        const product = await Product.findById(productId);
+        const product = await Product.findById(productIdString);
         if (!product) {
             return res.status(404).json({ message: 'محصول پیدا نشد.' });
-        }
-
-        // Check if requested quantity exceeds stock
-        if (quantity > product.stock) {
-            return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
         }
 
         let cart = await Cart.findOne({ user: userId });
@@ -56,30 +53,41 @@ exports.addItemToCart = async (req, res) => {
 
         // Check if the item with the same attributes already exists in the cart
         const existingItem = cart.items.find(item =>
-            item.product.equals(productId) &&
+            item.product.equals(productIdString) &&
             JSON.stringify(item.attributes) === JSON.stringify(itemAttributes)
         );
 
         if (existingItem) {
             const newQuantity = existingItem.quantity + quantity;
 
-            // Check if adding quantity exceeds stock
-            if (newQuantity > product.stock) {
-                return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
-            }
+            // If new quantity is less than or equal to zero, we do not remove the item
+            if (newQuantity <= 0) {
+                // Optionally, you can set the quantity to zero instead of deleting the item
+                existingItem.quantity = 0; // This retains the item in the cart with a quantity of 0
+            } else {
+                // Update quantity if it remains positive
+                existingItem.quantity = newQuantity;
 
-            existingItem.quantity = newQuantity; // Update quantity if attributes match
+                // Check if adding quantity exceeds stock
+                if (newQuantity > product.stock) {
+                    return res.status(400).json({ message: `موجودی کافی نیست. موجودی فعلی: ${product.stock}` });
+                }
+            }
         } else {
-            // Push new item with attributes (or empty array)
-            cart.items.push({ product: productId, quantity, attributes: itemAttributes });
+            // Only add item if quantity is positive
+            if (quantity > 0) {
+                cart.items.push({ product: productIdString, quantity, attributes: itemAttributes });
+            }
         }
 
         await cart.save();
-        res.status(200).json({ message: 'آیتم به سبد خرید اضافه شد', cart });
+        res.status(200).json({ message: 'تغییرات در سبد خرید با موفقیت ذخیره شد', cart });
     } catch (error) {
-        res.status(500).json({ message: 'خطا در اضافه کردن آیتم به سبد خرید', error: error.message });
+        res.status(500).json({ message: 'خطا در به روزرسانی سبد خرید', error: error.message });
     }
 };
+
+
 
 // Update item quantity in cart (only for active carts)
 exports.updateItemQuantity = async (req, res) => {
