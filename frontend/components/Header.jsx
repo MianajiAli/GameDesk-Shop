@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 const navItems = [
-    { label: 'صفحه اصلی', href: '/' },
-    { label: 'فروشگاه', href: '/shop/1' },
-    { label: 'بلاگ', href: '/blog' },
+    // { label: 'صفحه اصلی', href: '/' },
+    { label: 'فروشگاه', href: '/shop' },
+    // { label: 'بلاگ', href: '/blog' },
     { label: 'سبد خرید', href: '/shop/cart' },
     { label: 'ادمین', href: '/admin' }
 ];
@@ -25,7 +25,8 @@ export default function Header() {
             {/* Main Navigation */}
             <div className="bg-white w-full h-12 flex flex-row-reverse justify-between items-center px-5 md:px-10">
                 {/* Brand Name */}
-                <span className="text-2xl md:text-3xl font-bold select-none">آجر شاپ</span>
+
+                <Link href="/" className="text-2xl md:text-3xl font-bold select-none">آجر شاپ</Link>
 
                 {/* Hamburger Menu for Mobile */}
                 <button
@@ -45,23 +46,25 @@ export default function Header() {
                         </Link>
                     ))}
                 </div>
-            </div>
+            </div >
 
             {/* User Authentication Links */}
-            <div dir="rtl" className="bg-white w-full h-8 flex flex-row justify-end items-center px-5 md:px-10 gap-1 md:gap-3 text-xs md:text-sm">
+            < div dir="rtl" className="bg-white w-full h-8 flex flex-row justify-end items-center px-5 md:px-10 gap-1 md:gap-3 text-xs md:text-sm" >
                 <span> {userName ? 'سلام' + userName : ''}</span>
-                {userName ? (
-                    // Show logout if user is logged in
-                    <Link href="/auth/logout" className="hover:text-gray-600">خروج</Link>
-                ) : (
-                    // Show login/register if user is not logged in
-                    <>
-                        <Link href="/auth/login" className="hover:text-gray-600">ورود</Link>
-                        /
-                        <Link href="/auth/register" className="hover:text-gray-600">ثبت نام</Link>
-                    </>
-                )}
-            </div>
+                {
+                    userName ? (
+                        // Show logout if user is logged in
+                        <Link href="/auth/logout" className="hover:text-gray-600">خروج</Link>
+                    ) : (
+                        // Show login/register if user is not logged in
+                        <>
+                            <Link href="/auth/login" className="hover:text-gray-600">ورود</Link>
+                            /
+                            <Link href="/auth/register" className="hover:text-gray-600">ثبت نام</Link>
+                        </>
+                    )
+                }
+            </ div>
         </>
     );
 }

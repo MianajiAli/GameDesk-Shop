@@ -74,7 +74,7 @@ export default function Page() {
             {cartData.length <= 0 ? (
                 <div className="w-full h-[80vh] flex justify-center items-center flex-col gap-2">
                     <h2 className="text-3xl font-semibold">سبد خرید خالی است</h2>
-                    <Link className="hover:underline opacity-80" href="/shop/1">بازگشت به فروشگاه</Link>
+                    <Link className="hover:underline opacity-80" href="/shop">بازگشت به فروشگاه</Link>
                 </div>
             ) : (
                 <section dir="rtl" className="bg-white py-8 antialiased md:py-16">

@@ -2,13 +2,13 @@
 
 import { useRouter } from 'next/navigation';
 
-export default function Pagination({ currentPage, totalPages }) {
+export default function Pagination({ currentPage, totalPages, basePath }) {
     const router = useRouter();
 
     // Navigate to the specified page number
     const navigateToPage = (page) => {
         if (page > 0 && page <= totalPages) {
-            router.push(`/shop/${page}`);
+            router.push(`${basePath}?page=${page}`); // Change to query parameter
         }
     };
 
@@ -34,39 +34,42 @@ export default function Pagination({ currentPage, totalPages }) {
     };
 
     return (
-        <div className="flex justify-center items-center space-x-4 mt-5">
-            {/* Previous Button */}
-            <button
-                onClick={() => navigateToPage(currentPage - 1)}
-                disabled={currentPage <= 1}
-                aria-label="Go to previous page"
-                className="w-8 text-xl aspect-square bg-stone-900/80 text-white rounded-full flex justify-center items-center font-bold  disabled:bg-gray-300 hover:bg-blue-600 transition duration-200"
-            >
-                \
-            </button>
-
-            {/* Page Indicators */}
-            <div className="px-4 py-2 flex justify-center items-center gap-1">
-                {getPageIndicators().map((indicator, index) => (
-                    <div
-                        key={index}
-                        className={`w-8 text-xl aspect-square bg-stone-900/50 text-white rounded-full flex justify-center items-center font-bold cursor-pointer select-none hover:bg-blue-600 transition duration-200 ${indicator === currentPage ? 'bg-stone-900/80 text-white' : ''}`}
-                        onClick={() => typeof indicator === 'number' && navigateToPage(indicator)}
+        <nav dir="ltr" className=" w-full flex justify-center pt-10" aria-label="Page navigation example">
+            <ul className="list-style-none flex">
+                {/* Previous Button */}
+                <li>
+                    <a
+                        onClick={() => currentPage > 1 && navigateToPage(currentPage - 1)}
+                        aria-label="Go to previous page"
+                        className={`relative block rounded bg-transparent px-3 py-1.5 text-sm transition duration-300 ${currentPage <= 1 ? 'cursor-not-allowed opacity-50 text-gray-500' : 'text-gray-700 hover:bg-gray-200 focus:bg-gray-200'}`}
                     >
-                        {indicator}
-                    </div>
-                ))}
-            </div>
+                        Previous
+                    </a>
+                </li>
 
-            {/* Next Button */}
-            <button
-                onClick={() => navigateToPage(currentPage + 1)}
-                disabled={currentPage >= totalPages}
-                aria-label="Go to next page"
-                className="w-8 text-xl aspect-square bg-stone-900/80 text-white rounded-full flex justify-center items-center font-bold  disabled:bg-gray-300 hover:bg-blue-600 transition duration-200"
-            >
-                /
-            </button>
-        </div>
+                {/* Page Indicators */}
+                {getPageIndicators().map((indicator, index) => (
+                    <li key={index} aria-current={indicator === currentPage ? 'page' : undefined}>
+                        <a
+                            onClick={() => typeof indicator === 'number' && navigateToPage(indicator)}
+                            className={`relative block rounded bg-transparent px-3 py-1.5 text-sm transition duration-300 ${indicator === currentPage ? 'bg-gray-300 text-gray-900' : 'text-gray-700 hover:bg-gray-200 focus:bg-gray-200'}`}
+                        >
+                            {indicator}
+                        </a>
+                    </li>
+                ))}
+
+                {/* Next Button */}
+                <li>
+                    <a
+                        onClick={() => currentPage < totalPages && navigateToPage(currentPage + 1)}
+                        aria-label="Go to next page"
+                        className={`relative block rounded bg-transparent px-3 py-1.5 text-sm transition duration-300 ${currentPage >= totalPages ? 'cursor-not-allowed opacity-50 text-gray-500' : 'text-gray-700 hover:bg-gray-200 focus:bg-gray-200'}`}
+                    >
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </nav>
     );
 }

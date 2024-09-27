@@ -3,22 +3,27 @@ const Product = require('../models/productModel');
 // Get all products with pagination
 exports.getProducts = async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Default to page 1
-    const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
-    const skip = (page - 1) * limit;
+    const limit = parseInt(req.query.limit) || 20; // Default to 20 items per page
+    const skip = (page - 1) * limit; // Calculate the number of items to skip
 
     try {
+        // Fetch products with skip and limit
         const products = await Product.find({})
             .skip(skip)
             .limit(limit);
+
+        // Count total products for pagination
         const total = await Product.countDocuments();
 
+        // Send response with total, current page, total pages, and products
         res.status(200).json({
             total,
             page,
-            totalPages: Math.ceil(total / limit),
+            totalPages: Math.ceil(total / limit), // Calculate total pages
             products,
         });
     } catch (error) {
+        // Handle any errors
         res.status(500).json({ message: 'Error fetching products', error: error.message });
     }
 };
