@@ -98,7 +98,7 @@ exports.updateProduct = async (req, res) => {
             images,
             imageAlt,
             discount: discount !== undefined ? parsedDiscount : undefined,
-            productUrl // Add the productUrl field here
+            productUrl
         }, { new: true });
 
         if (!product) return res.status(404).json({ message: 'Product not found' });
