@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen justify-between">
       <div><Header /></div>
-      <div className=" w-full p-3 ">
+      <div className=" w-full p-3 space-y-3 ">
 
         <div className=" w-full mx-auto max-w-[1200px]  ">
           <Link href="/shop">
@@ -24,7 +24,9 @@ export default function Page() {
           </Link>
         </div>
 
-        <div className="w-full h-[10rem] bg-slate-100 rounded-sm"></div>
+        <div className="w-full h-[10rem] rounded-sm flex ">
+          categories
+        </div>
       </div >
       <Footer />
     </div >
