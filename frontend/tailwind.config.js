@@ -7,13 +7,23 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Corrected 'Fonts' to 'fontFamily'
       fontFamily: {
-        main: ["danaFont", "sans-serif"], // Specify fallback font
+        main: ["danaFont", "sans-serif"], // Specifies 'danaFont' as the main font with 'sans-serif' as fallback
       },
       colors: {
-        background: "var(--background)",
+        background: "var(--background)", // Uses custom CSS variables for dynamic theming
         foreground: "var(--foreground)",
+      },
+      keyframes: {
+        // Adding keyframes for the animation you requested (slide down with opacity transition)
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        // Creates an animation utility class
+        slideDown: 'slideDown 1.6s ease-out forwards',
       },
     },
   },

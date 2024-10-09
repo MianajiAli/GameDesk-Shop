@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import Link from "next/link";
 
 const sidebarData = {
@@ -25,6 +26,7 @@ const sidebarData = {
 const layout = ({ children }) => {
     return (
         <>
+            <NextSeo noindex={true} nofollow={true} />
             <div className="flex">
                 <div className="bg-white min-h-screen flex-1 md:mr-60 mr-0">
                     {children}

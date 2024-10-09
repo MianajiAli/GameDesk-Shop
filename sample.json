@@ -1,196 +1,258 @@
 [
     {
-        "name": "گوشی موبایل سامسونگ",
-        "price": 10000000,
-        "description": "گوشی موبایل سامسونگ مدل گلکسی A52 با صفحه نمایش 6.5 اینچ و دوربین چهارگانه",
-        "category": "الکترونیک",
-        "stock": 50,
-        "attributes": [
-            {
-                "title": "رنگ",
-                "values": [
-                    "مشکی",
-                    "سفید",
-                    "آبی"
-                ]
-            },
-            {
-                "title": "حافظه داخلی",
-                "values": [
-                    "128 گیگابایت",
-                    "256 گیگابایت"
-                ]
-            }
-        ],
-        "images": [
-            "/products/samsung-galaxy-a52.jpg"
-        ],
-        "imageAlt": "گوشی موبایل سامسونگ گلکسی A52",
-        "discount": 10,
-        "finalPrice": 9000000
-    },
-    {
-        "name": "لپ‌تاپ اپل مک‌بوک پرو",
-        "price": 30000000,
-        "description": "لپ‌تاپ اپل مدل مک‌بوک پرو با پردازنده i7 و حافظه رم 16 گیگابایت",
-        "category": "الکترونیک",
-        "stock": 30,
-        "attributes": [
-            {
-                "title": "رنگ",
-                "values": [
-                    "فضایی خاکستری",
-                    "نقره‌ای"
-                ]
-            },
-            {
-                "title": "حافظه",
-                "values": [
-                    "512 گیگابایت SSD",
-                    "1 ترابایت SSD"
-                ]
-            }
-        ],
-        "images": [
-            "/products/macbook-pro.jpg"
-        ],
-        "imageAlt": "لپ‌تاپ اپل مک‌بوک پرو",
-        "discount": 5,
-        "finalPrice": 28500000
-    },
-    {
-        "name": "تلویزیون ال‌جی 4K",
-        "price": 7000000,
-        "description": "تلویزیون ال‌جی مدل 55 اینچ با کیفیت تصویر 4K و سیستم صوتی Dolby",
-        "category": "خانه و آشپزخانه",
-        "stock": 20,
-        "attributes": [
-            {
-                "title": "اندازه",
-                "values": [
-                    "55 اینچ",
-                    "65 اینچ"
-                ]
-            },
-            {
-                "title": "نوع صفحه نمایش",
-                "values": [
-                    "LED",
-                    "OLED"
-                ]
-            }
-        ],
-        "images": [
-            "/products/lg-tv-4k.jpg"
-        ],
-        "imageAlt": "تلویزیون ال‌جی 4K",
-        "discount": 8,
-        "finalPrice": 6440000
-    },
-    {
-        "name": "چای ساز فیلیپس",
-        "price": 1200000,
-        "description": "چای ساز فیلیپس با ظرفیت 1.7 لیتر و قابلیت تنظیم دما",
-        "category": "خانه و آشپزخانه",
-        "stock": 40,
-        "attributes": [
-            {
-                "title": "رنگ",
-                "values": [
-                    "استیل",
-                    "سفید"
-                ]
-            }
-        ],
-        "images": [
-            "/products/philips-tea-maker.jpg"
-        ],
-        "imageAlt": "چای ساز فیلیپس",
-        "discount": 15,
-        "finalPrice": 1020000
-    },
-    {
-        "name": "کفش ورزشی نایک",
-        "price": 2500000,
-        "description": "کفش ورزشی نایک مدل Air Max با طراحی راحت و تنفس‌پذیر",
-        "category": "پوشاک",
-        "stock": 60,
-        "attributes": [
-            {
-                "title": "رنگ",
-                "values": [
-                    "مشکی",
-                    "سفید",
-                    "قرمز"
-                ]
-            },
-            {
-                "title": "سایز",
-                "values": [
-                    "40",
-                    "41",
-                    "42",
-                    "43"
-                ]
-            }
-        ],
-        "images": [
-            "/products/nike-air-max.jpg"
-        ],
-        "imageAlt": "کفش ورزشی نایک Air Max",
-        "discount": 12,
-        "finalPrice": 2200000
-    },
-    {
-        "name": "ساعت هوشمند اپل",
-        "price": 5000000,
-        "description": "ساعت هوشمند اپل مدل Series 6 با قابلیت‌های تناسب اندام و سلامتی",
-        "category": "الکترونیک",
-        "stock": 25,
-        "attributes": [
-            {
-                "title": "رنگ",
-                "values": [
-                    "مشکی",
-                    "سفید",
-                    "قرمز"
-                ]
-            }
-        ],
-        "images": [
-            "/products/apple-watch-series6.jpg"
-        ],
-        "imageAlt": "ساعت هوشمند اپل Series 6",
-        "discount": 7,
-        "finalPrice": 4650000
-    },
-    {
-        "name": "دوربین کانن EOS",
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182ce4",
+        "name": "میز بازی DXRacer",
         "price": 12000000,
-        "description": "دوربین دیجیتال کانن مدل EOS 80D با لنز 18-55 میلی‌متر",
-        "category": "عکاسی",
+        "description": "میز بازی DXRacer با طراحی ارگونومیک و سطح بزرگ مناسب برای بازی های رایانه ای",
+        "category": "مبلمان",
+        "stock": 6,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "قرمز",
+                    "آبی"
+                ],
+                "_id": "66ed7e9117246c7cdd182ce5"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182ce6"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/1.jpg"
+        ],
+        "imageAlt": "میز بازی DXRacer",
+        "discount": 15,
+        "finalPrice": 10200000,
+        "productUrl": "dxracer"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182ce7",
+        "name": "میز بازی Arozzi",
+        "price": 15000000,
+        "description": "میز بازی Arozzi با قابلیت تنظیم ارتفاع و طراحی مدرن",
+        "category": "مبلمان",
         "stock": 15,
         "attributes": [
             {
                 "title": "رنگ",
                 "values": [
                     "مشکی",
-                    "نقره‌ای"
-                ]
+                    "سفید",
+                    "سبز"
+                ],
+                "_id": "66ed7e9117246c7cdd182ce8"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوبی",
+                    "شیشه"
+                ],
+                "_id": "66ed7e9117246c7cdd182ce9"
             }
         ],
         "images": [
-            "/products/canon-eos-80d.jpg"
+            "/images/products/tabels/2.jpg"
         ],
-        "imageAlt": "دوربین دیجیتال کانن EOS 80D",
+        "imageAlt": "میز بازی Arozzi",
         "discount": 10,
-        "finalPrice": 10800000
+        "finalPrice": 13500000,
+        "productUrl": "arozzi"
     },
     {
-        "name": "بخاری برقی دیجی کالا",
-        "price": 800000,
-        "description": "بخاری برقی دیجی کالا با قابلیت تنظیم دما و طراحی مدرن",
-        "category": "خانه و آشپزخانه",
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d02",
+        "name": "میز بازی Lian Li",
+        "price": 13500000,
+        "description": "میز بازی Lian Li با طراحی شیک و مدرن و قابلیت تنظیم ارتفاع",
+        "category": "مبلمان",
+        "stock": 20,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "نقره‌ای",
+                    "مشکی"
+                ],
+                "_id": "66ed7e9117246c7cdd182d03"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "آلومینیوم",
+                    "شیشه"
+                ],
+                "_id": "66ed7e9117246c7cdd182d04"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/11.jpg"
+        ],
+        "imageAlt": "میز بازی Lian Li",
+        "discount": 5,
+        "finalPrice": 12825000,
+        "productUrl": "lian-li"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182cf9",
+        "name": "میز بازی Razer",
+        "price": 14000000,
+        "description": "میز بازی Razer با طراحی مدرن و کیفیت ساخت بالا",
+        "category": "مبلمان",
+        "stock": 1,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ],
+                "_id": "66ed7e9117246c7cdd182cfa"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوبی",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182cfb"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/8.jpg"
+        ],
+        "imageAlt": "میز بازی Razer",
+        "discount": 5,
+        "finalPrice": 13300000,
+        "productUrl": "razer"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182ced",
+        "name": "میز بازی Walker",
+        "price": 9000000,
+        "description": "میز بازی Walker با طراحی زیبا و قابلیت جمع شدن",
+        "category": "مبلمان",
+        "stock": 31,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "طوسی"
+                ],
+                "_id": "66ed7e9117246c7cdd182cee"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "آلومینیوم",
+                    "شیشه"
+                ],
+                "_id": "66ed7e9117246c7cdd182cef"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/4.jpg"
+        ],
+        "imageAlt": "میز بازی Walker",
+        "discount": 12,
+        "finalPrice": 7920000,
+        "productUrl": "walker"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182cff",
+        "name": "میز بازی Corsair",
+        "price": 12500000,
+        "description": "میز بازی Corsair با طراحی زیبا و سیستم مدیریت کابل",
+        "category": "مبلمان",
+        "stock": 17,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "آبی"
+                ],
+                "_id": "66ed7e9117246c7cdd182d00"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوبی",
+                    "پلاستیک"
+                ],
+                "_id": "66ed7e9117246c7cdd182d01"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/10.jpg"
+        ],
+        "imageAlt": "میز بازی Corsair",
+        "discount": 10,
+        "finalPrice": 11250000,
+        "productUrl": "corsair"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d08",
+        "name": "میز بازی Infin8",
+        "price": 11500000,
+        "description": "میز بازی Infin8 با قابلیت شخصی‌سازی و طراحی مدرن",
+        "category": "مبلمان",
+        "stock": 15,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "سبز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d09"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوبی",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d0a"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/3.jpg"
+        ],
+        "imageAlt": "میز بازی Infin8",
+        "discount": 12,
+        "finalPrice": 10140000,
+        "productUrl": "infin8"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d15",
+        "name": "میز بازی ZXT",
+        "price": 8500000,
+        "description": "میز بازی ZXT با طراحی جمع و جور و قابلیت جابه‌جایی آسان",
+        "category": "مبلمان",
         "stock": 35,
         "attributes": [
             {
@@ -198,119 +260,269 @@
                 "values": [
                     "مشکی",
                     "سفید"
-                ]
-            }
-        ],
-        "images": [
-            "/products/digi-kala-heater.jpg"
-        ],
-        "imageAlt": "بخاری برقی دیجی کالا",
-        "discount": 5,
-        "finalPrice": 760000
-    },
-    {
-        "name": "کتاب تاریخ ایران",
-        "price": 300000,
-        "description": "کتاب تاریخ ایران نوشته محمدمهدی فولادوند با چاپ جلد سخت",
-        "category": "کتاب و رسانه",
-        "stock": 100,
-        "attributes": [
-            {
-                "title": "نوع جلد",
-                "values": [
-                    "جلد سخت",
-                    "جلد نرم"
-                ]
-            }
-        ],
-        "images": [
-            "/products/iran-history-book.jpg"
-        ],
-        "imageAlt": "کتاب تاریخ ایران",
-        "discount": 20,
-        "finalPrice": 240000
-    },
-    {
-        "name": "پیراهن مردانه زارا",
-        "price": 800000,
-        "description": "پیراهن مردانه زارا مدل کلاسیک با طراحی ساده و شیک",
-        "category": "پوشاک",
-        "stock": 70,
-        "attributes": [
-            {
-                "title": "رنگ",
-                "values": [
-                    "آبی",
-                    "سفید",
-                    "مشکی"
-                ]
+                ],
+                "_id": "66ed7e9117246c7cdd182d16"
             },
             {
-                "title": "سایز",
+                "title": "جنس",
                 "values": [
-                    "M",
-                    "L",
-                    "XL"
-                ]
+                    "چوب MDF",
+                    "پلاستیک"
+                ],
+                "_id": "66ed7e9117246c7cdd182d17"
             }
         ],
         "images": [
-            "/products/zara-mens-shirt.jpg"
+            "/images/products/tabels/5.jpg"
         ],
-        "imageAlt": "پیراهن مردانه زارا",
+        "imageAlt": "میز بازی ZXT",
         "discount": 10,
-        "finalPrice": 720000
+        "finalPrice": 7650000,
+        "productUrl": "zxt"
     },
     {
-        "name": "ماشین اصلاح پاناسونیک",
-        "price": 1500000,
-        "description": "ماشین اصلاح پاناسونیک مدل ER-GB80 با تیغه‌های تیز و قابل شستشو",
-        "category": "آرایشی و بهداشتی",
-        "stock": 45,
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d1d",
+        "name": "میز بازی E-Win",
+        "price": 9500000,
+        "description": "میز بازی E-Win با سطح بزرگ و طراحی ارگونومیک",
+        "category": "مبلمان",
+        "stock": 28,
         "attributes": [
             {
                 "title": "رنگ",
                 "values": [
                     "مشکی",
-                    "نقره‌ای"
-                ]
+                    "قرمز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d1e"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوبی",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d1f"
             }
         ],
         "images": [
-            "/products/panasonic-trimmer.jpg"
+            "/images/products/tabels/6.jpg"
         ],
-        "imageAlt": "ماشین اصلاح پاناسونیک ER-GB80",
-        "discount": 8,
-        "finalPrice": 1380000
+        "imageAlt": "میز بازی E-Win",
+        "discount": 10,
+        "finalPrice": 8550000,
+        "productUrl": "e-win"
     },
     {
-        "name": "دوچرخه کوهستان",
-        "price": 4500000,
-        "description": "دوچرخه کوهستان با فریم آلومینیومی و سیستم تعلیق جلو",
-        "category": "ورزش",
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d21",
+        "name": "میز بازی Techni Sport",
+        "price": 11000000,
+        "description": "میز بازی Techni Sport با طراحی حرفه‌ای و پشتیبانی از سیستم‌های مختلف",
+        "category": "مبلمان",
+        "stock": 16,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "آبی"
+                ],
+                "_id": "66ed7e9117246c7cdd182d22"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوبی",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d23"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/7.jpg"
+        ],
+        "imageAlt": "میز بازی Techni Sport",
+        "discount": 8,
+        "finalPrice": 10120000,
+        "productUrl": "techni-sport"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d29",
+        "name": "میز بازی Nitro Concepts",
+        "price": 9800000,
+        "description": "میز بازی Nitro Concepts با طراحی خاص و سطح گسترده",
+        "category": "مبلمان",
+        "stock": 25,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "آبی"
+                ],
+                "_id": "66ed7e9117246c7cdd182d2a"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوبی",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d2b"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/12.jpg"
+        ],
+        "imageAlt": "میز بازی Nitro Concepts",
+        "discount": 8,
+        "finalPrice": 9016000,
+        "productUrl": "nitro-concepts"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d32",
+        "name": "میز بازی Cougar",
+        "price": 8000000,
+        "description": "میز بازی Cougar با طراحی مناسب و فضای کافی برای تجهیزات گیمینگ",
+        "category": "مبلمان",
+        "stock": 26,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "قرمز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d33"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d34"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/13.jpg"
+        ],
+        "imageAlt": "میز بازی Cougar",
+        "discount": 5,
+        "finalPrice": 7600000,
+        "productUrl": "cougar"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d37",
+        "name": "میز بازی Zowie",
+        "price": 13000000,
+        "description": "میز بازی Zowie با قابلیت تنظیم ارتفاع و طراحی جالب",
+        "category": "مبلمان",
+        "stock": 11,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "قرمز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d38"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d39"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/14.jpg"
+        ],
+        "imageAlt": "میز بازی Zowie",
+        "discount": 12,
+        "finalPrice": 11440000,
+        "productUrl": "zowie"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d3c",
+        "name": "میز بازی Arozzi Arena",
+        "price": 14500000,
+        "description": "میز بازی Arozzi Arena با سطح بزرگ و طراحی ارگونومیک",
+        "category": "مبلمان",
         "stock": 10,
         "attributes": [
             {
                 "title": "رنگ",
                 "values": [
-                    "قرمز",
-                    "آبی",
-                    "مشکی"
-                ]
+                    "مشکی",
+                    "آبی"
+                ],
+                "_id": "66ed7e9117246c7cdd182d3d"
             },
             {
-                "title": "سایز",
+                "title": "جنس",
                 "values": [
-                    "سایز M",
-                    "سایز L"
-                ]
+                    "چوبی",
+                    "فلز"
+                ],
+                "_id": "66ed7e9117246c7cdd182d3e"
             }
         ],
         "images": [
-            "/products/mountain-bike.jpg"
+            "/images/products/tabels/15.jpg"
         ],
-        "imageAlt": "دوچرخه کوهستان",
-        "discount": 12,
-        "finalPrice": 3960000
+        "imageAlt": "میز بازی Arozzi Arena",
+        "discount": 10,
+        "finalPrice": 13050000,
+        "productUrl": "arozzi-arena"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "_id": "66ed7e9117246c7cdd182d42",
+        "name": "میز بازی Ultimate",
+        "price": 7000000,
+        "description": "میز بازی Ultimate با طراحی ساده و کاربردی",
+        "category": "مبلمان",
+        "stock": 40,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "سفید"
+                ],
+                "_id": "66ed7e9117246c7cdd182d43"
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "پلاستیک"
+                ],
+                "_id": "66ed7e9117246c7cdd182d44"
+            }
+        ],
+        "images": [
+            "/images/products/tabels/16.jpg"
+        ],
+        "imageAlt": "میز بازی Ultimate",
+        "discount": 0,
+        "finalPrice": 7000000,
+        "productUrl": "ultimate"
     }
 ]

@@ -63,6 +63,14 @@ const ProductSchema = new mongoose.Schema({
         type: String, // URL for the product page
         // required: true,
     },
+    isDeleted: {
+        type: Boolean,
+        default: false, // Default to not deleted
+    },
+    featured: {
+        type: Boolean,
+        default: false, // Default to not featured
+    },
 }, { timestamps: true });
 
 // Pre-save middleware to update finalPrice before saving
@@ -76,5 +84,21 @@ ProductSchema.pre('save', function (next) {
 
     next();
 });
+
+// Static method to get all products that are not deleted
+ProductSchema.statics.findNotDeleted = function (filters = {}) {
+    return this.find({ isDeleted: false, ...filters });
+};
+
+// Static method to get all featured products
+ProductSchema.statics.findFeatured = function () {
+    return this.find({ isDeleted: false, featured: true });
+};
+
+// Instance method to soft delete a product
+ProductSchema.methods.softDelete = function () {
+    this.isDeleted = true;
+    return this.save();
+};
 
 module.exports = mongoose.model('Product', ProductSchema);

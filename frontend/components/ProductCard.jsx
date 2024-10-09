@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+
 const ProductCard = ({ product }) => {
     const imageUrl = process.env.BACKEND_API_URL + product.images[0];
+
     const formatPrice = (price) => {
         return new Intl.NumberFormat().format(price);
     };
 
     return (
-
-        <Link href={"/shop/product/" + product._id} className="flex flex-row-reverse sm:flex-col shadow-lg rounded-lg p-3 gap-3">
-            <div className="relative w-32 sm:w-56 aspect-square  ">
+        <Link href={"/shop/product/" + product._id} className="flex flex-row-reverse sm:flex-col gap-1 ">
+            <div className="relative w-32 sm:w-72 aspect-square">
                 <Image
                     src={imageUrl}
                     alt={product.imageAlt}
@@ -17,45 +18,49 @@ const ProductCard = ({ product }) => {
                     placeholder='empty'
                     priority={true}
                     sizes="100%"
-                    className="rounded-lg object-cover bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm   "
+                    className="object-cover shadow-md bg-black/5 text-black/50 flex justify-center items-center text-right text-xs md:text-sm"
                 />
             </div>
-            <div className="w-56 flex flex-col justify-between">
+            <div className="w-72 flex flex-col justify-between p-2 ">
                 <div>
-                    <h3 dir="rtl" className="text-base">{product.name}</h3>
-                    {/* <p dir="rtl" className="text-sm opacity-70">{description}</p> */}
+                    <h3 dir="rtl" className="text-xl font-semibold pb-3 text-black/90">{product.name}</h3>
                 </div>
-                <div className="flex justify-between mt-2">
-                    <div className="flex gap-1 items-center opacity-80">
-                        {product.discount && product.discount !== 0 ? (
-                            <>
-                                <span className="text-lg font-semibold ">
-                                    {formatPrice(product.finalPrice)}
-                                </span>
-                                <span className="text-sm font-semibold opacity-60 text-red-800 line-through">
+                <div className="h-10 flex flex-col justify-center">
+                    <div className="flex justify-end mr-2.5">
+                        {product.discount > 0 && (
+                            <div className="flex gap-1 items-center h-4">
+                                <span className="text-lg font-medium opacity-60 text-black line-through">
                                     {formatPrice(product.price)}
-
                                 </span>
-                            </>
-                        ) : (
-                            <span className="text-lg font-semibold"> {formatPrice(product.price)}</span>
+                                <span className="inline-flex items-center bg-blue-50 text-blue-700 text-xs font-semibold px-1 py-0.5 rounded-md ring-1 ring-inset ring-blue-600/10">
+                                    {product.discount} %
+                                </span>
+                            </div>
                         )}
-                        {/* <svg
-                            className="w-4 h-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 1080 1080"
-                        >
-                            <path d="m1007.94,560.43c-17.72,46.59-50.83,80.65-99.33,102.21-30.81,13.1-67.96,21.58-111.46,25.43-43.5,3.84-129.18,5.76-256.99,5.76s-213.86-2.11-258.14-6.34c-44.28-4.24-81.42-12.52-111.45-24.85-47.75-21.56-80.47-55.04-98.17-100.48-17.72-45.42-18.88-97.39-3.47-155.92l42.73-165.17,102.8,30.03-43.89,169.79c-7.71,30.04-8.28,53.71-1.74,71.04,6.55,17.32,21.38,31,44.47,41,18.47,7.7,47.16,13.09,86.05,16.17,38.87,3.08,119.16,4.61,240.83,4.61,85.47,0,151.11-.96,196.92-2.88,45.81-1.92,75.25-4.23,88.34-6.94,13.1-2.68,26.19-6.73,39.28-12.12,25.41-10.78,40.99-24.83,46.77-42.16,5.78-17.31,4.05-44.07-5.19-80.28l-43.89-160.54,103.95-30.02,43.89,160.53c16.16,60.84,15.4,114.55-2.31,161.13Z" />
-                            <rect x="383.63" y="238.5" width="301" height="112" />
-                            <rect x="278.38" y="562.75" width="322.5" height="112" transform="translate(1058.38 179.12) rotate(90)" />
-                            <rect x="473.38" y="562.75" width="322.5" height="112" transform="translate(1253.38 -15.88) rotate(90)" />
-                        </svg> */}
                     </div>
-                    {product.discount !== 0 && (
-                        <span className="inline-flex items-center rounded-md bg-red-50 px-1 py-0 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                            {product.discount} %
+                    <div dir="rtl" className="flex gap-1 justify-start items-center mr-1.5  text-black/80" >
+                        <span className="text-xl font-semibold">{formatPrice(product.finalPrice)}</span>
+                        <span className="text-sm">تومان</span>
+                    </div>
+                </div>
+                <div dir="rtl" className="flex gap-1 justify-start items-center h-8">
+                    {product.discount > 0 && (
+                        <span className="inline-flex items-center bg-pink-50/50 text-pink-700 text-xs font-semibold px-2.5 py-0.5 rounded-md ring-1 ring-inset ring-pink-600/10">
+                            حراج
                         </span>
                     )}
+                    {product.featured && (
+                        <span className="inline-flex items-center bg-yellow-50/50 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-md ring-1 ring-inset ring-yellow-700/10">
+                            ویژه
+                        </span>
+                    )}
+
+                    {/* <span className="inline-flex items-center bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded-md ring-1 ring-inset ring-blue-700/10">
+                        خرید قسطی
+                    </span>
+                    <span className="inline-flex items-center bg-green-50 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded-md ring-1 ring-inset ring-green-600/10">
+                        ارسال رایگان
+                    </span> */}
                 </div>
             </div>
         </Link>

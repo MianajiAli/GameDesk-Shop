@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import FeaturedProducts from "@/components/FeaturedProducts";
 
 export default function Page() {
   return (
@@ -19,7 +20,7 @@ export default function Page() {
         <section className="w-full mx-auto max-w-[1200px] space-y-2">
 
           <Link href="/shop">
-            <div className="relative w-full aspect-[10/4]">
+            <div className="relative w-full aspect-[10/4] ">
               <Image
                 src={'/images/banners/hero.webp'}
                 alt={'/'}
@@ -33,10 +34,10 @@ export default function Page() {
           </Link>
 
           {/* Banner Grid */}
-          <div className="w-full min-h-[10rem] rounded-sm grid grid-cols-2 md:grid-cols-4 gap-1 *:flex *:justify-center *:items-center">
+          <div className="animate-slideDown w-full min-h-[10rem] rounded-sm grid grid-cols-2 md:grid-cols-4 gap-1 *:flex *:justify-center *:items-center">
 
             <div>
-              <div className="relative w-full aspect-[10/4]">
+              <div className="relative w-full aspect-[10/4] ">
                 <Image
                   src={'/images/banners/hero11.webp'}
                   alt={'/'}
@@ -91,62 +92,81 @@ export default function Page() {
             </div>
           </div>
         </section>
+        {/* Section 7: Sales & Promotions */}
+        <section className="w-full mx-auto max-w-[1200px] space-y-2">
+          <h2 className="text-xl font-semibold text-right">تخفیف‌ها و پیشنهادات ویژه</h2>
+          <div className="p-4 bg-yellow-200 text-right" dir="rtl">پیشنهاد ویژه: ۲۰٪ تخفیف روی تمام محصولات!</div>
+          <FeaturedProducts discounted></FeaturedProducts>
+
+        </section>
 
         {/* Section 6: Featured Products or Bestsellers */}
         <section className="w-full mx-auto max-w-[1200px] space-y-2">
-          <h2 className="text-xl font-semibold">Featured Products</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* Placeholder for featured products */}
-            <div className="p-4 bg-gray-200">Product 1</div>
-            <div className="p-4 bg-gray-200">Product 2</div>
-            <div className="p-4 bg-gray-200">Product 3</div>
-            <div className="p-4 bg-gray-200">Product 4</div>
-          </div>
+          {/* <h2 className="text-xl font-semibold">محصولات ویژه</h2> */}
+          <FeaturedProducts></FeaturedProducts>
+
         </section>
 
-        {/* Section 7: Sales & Promotions */}
-        <section className="w-full mx-auto max-w-[1200px] space-y-2">
-          <h2 className="text-xl font-semibold">Current Sales & Promotions</h2>
-          <div className="p-4 bg-yellow-200">Limited-time Offer: 20% off on all items!</div>
-        </section>
+
 
         {/* Section 8: Customer Testimonials/Reviews */}
         <section className="w-full mx-auto max-w-[1200px] space-y-2">
-          <h2 className="text-xl font-semibold">What Our Customers Say</h2>
-          <div className="space-y-4">
-            <blockquote className="p-4 bg-gray-100 rounded-md">
-              "Great products, fast shipping!" - Customer A
+          <h2 className="text-xl font-semibold text-right">نظرات مشتریان ما</h2>
+          <div className="flex flex-col md:flex-row gap-3 py-3">
+
+            <blockquote className="flex-1 bg-gray-100 rounded-md">
+              <div className="relative w-full aspect-[10/4.8] ">
+                <Image
+                  src={'/images/banners/x.png'}
+                  alt={'/'}
+                  fill
+                  placeholder='empty'
+                  priority
+                  sizes="100%"
+                  className="rounded-md object-contain text-black/50 flex justify-center items-center text-right text-xs md:text-sm"
+                />
+              </div>
             </blockquote>
-            <blockquote className="p-4 bg-gray-100 rounded-md">
-              "I love the quality of the items!" - Customer B
+            <blockquote className="flex-1 bg-gray-100 rounded-md">
+              <div className="relative w-full aspect-[10/4.8] ">
+                <Image
+                  src={'/images/banners/x.png'}
+                  alt={'/'}
+                  fill
+                  placeholder='empty'
+                  priority
+                  sizes="100%"
+                  className="rounded-md object-contain text-black/50 flex justify-center items-center text-right text-xs md:text-sm"
+                />
+              </div>
             </blockquote>
           </div>
         </section>
 
-        {/* Section 9: Trust Signals */}
-        <section className="w-full mx-auto max-w-[1200px] space-y-2">
-          <h2 className="text-xl font-semibold">Shop with Confidence</h2>
-          <div className="flex space-x-4">
-            <Image src="/images/trust-badge-1.webp" alt="Secure Payment" width={50} height={50} />
-            <Image src="/images/trust-badge-2.webp" alt="Free Returns" width={50} height={50} />
-          </div>
-        </section>
+
 
         {/* Section 10: Personalized Recommendations */}
         <section className="w-full mx-auto max-w-[1200px] space-y-2">
-          <h2 className="text-xl font-semibold">Recommended for You</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* Placeholder for recommended products */}
-            <div className="p-4 bg-gray-200">Product A</div>
-            <div className="p-4 bg-gray-200">Product B</div>
-            <div className="p-4 bg-gray-200">Product C</div>
-            <div className="p-4 bg-gray-200">Product D</div>
-          </div>
+          <h2 className="text-xl font-semibold text-right ">جدیدترین محصولات</h2>
+
+          {/* Placeholder for recommended products */}
+          <FeaturedProducts newest></FeaturedProducts>
+
         </section>
 
-
-
-
+        <section>
+          <div className="relative w-full aspect-[1920/500]">
+            <Image
+              src={'/images/banners/telegram.png'}
+              alt={'/'}
+              fill
+              placeholder='empty'
+              priority
+              sizes="100%"
+              className="rounded-md object-cover text-black/50 flex justify-center items-center text-right text-xs md:text-sm"
+            />
+          </div>
+        </section>
 
       </main>
 
