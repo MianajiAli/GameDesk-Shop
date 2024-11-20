@@ -1,0 +1,315 @@
+[
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "Eureka Ergonomic Z1-S",
+        "price": 6000000,
+        "description": "میز بازی Eureka Ergonomic Z1-S با طراحی ارگونومیک و نورهای RGB، مناسب برای گیمینگ حرفه‌ای.",
+        "category": "مبلمان",
+        "stock": 10,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/eureka-z1-s.jpg"
+        ],
+        "imageAlt": "میز بازی Eureka Ergonomic Z1-S",
+        "discount": 10,
+        "finalPrice": 5400000,
+        "productUrl": "eureka-z1-s"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "Arozzi Arena",
+        "price": 9000000,
+        "description": "میز بازی Arozzi Arena با سطح بزرگ و طراحی ارگونومیک، مناسب برای استفاده از چند مانیتور.",
+        "category": "مبلمان",
+        "stock": 8,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "قرمز",
+                    "آبی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/arozzi-arena.jpg"
+        ],
+        "imageAlt": "میز بازی Arozzi Arena",
+        "discount": 5,
+        "finalPrice": 8550000,
+        "productUrl": "arozzi-arena"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "DESINO 40 Inch",
+        "price": 4500000,
+        "description": "میز گیمینگ DESINO 40 اینچ، مناسب برای فضاهای کوچک با طراحی کاربردی و ارگونومیک.",
+        "category": "مبلمان",
+        "stock": 12,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/desino-40.jpg"
+        ],
+        "imageAlt": "میز بازی DESINO 40 Inch",
+        "discount": 8,
+        "finalPrice": 4140000,
+        "productUrl": "desino-40-inch"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "Vitesse 55 Inch",
+        "price": 7000000,
+        "description": "میز گیمینگ Vitesse 55 اینچ با امکانات نگهدارنده کنترلر، جا لیوانی و پایه مانیتور.",
+        "category": "مبلمان",
+        "stock": 7,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی",
+                    "قرمز"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/vitesse-55.jpg"
+        ],
+        "imageAlt": "میز بازی Vitesse 55 Inch",
+        "discount": 7,
+        "finalPrice": 6510000,
+        "productUrl": "vitesse-55-inch"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "Atlantic Gaming Desk",
+        "price": 5000000,
+        "description": "میز گیمینگ Atlantic با قابلیت نگهداری کنترلر، هدفون و بازی‌ها، طراحی کوچک و کاربردی.",
+        "category": "مبلمان",
+        "stock": 15,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/atlantic-gaming.jpg"
+        ],
+        "imageAlt": "میز بازی Atlantic Gaming Desk",
+        "discount": 10,
+        "finalPrice": 4500000,
+        "productUrl": "atlantic-gaming-desk"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "GreenForest L-Shape",
+        "price": 8000000,
+        "description": "میز گیمینگ به شکل L مناسب برای فضاهای گوشه‌ای با سطح بزرگ و کاربردی.",
+        "category": "مبلمان",
+        "stock": 9,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/greenforest-l-shape.jpg"
+        ],
+        "imageAlt": "میز بازی GreenForest L-Shape",
+        "discount": 12,
+        "finalPrice": 7040000,
+        "productUrl": "greenforest-l-shape"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "Mr IRONSTONE 45.3 Inch",
+        "price": 5500000,
+        "description": "میز گیمینگ Mr IRONSTONE با طراحی ساده و سطح ضد خش، مناسب برای گیمینگ و کار روزانه.",
+        "category": "مبلمان",
+        "stock": 14,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/mr-ironstone.jpg"
+        ],
+        "imageAlt": "میز بازی Mr IRONSTONE 45.3 Inch",
+        "discount": 5,
+        "finalPrice": 5225000,
+        "productUrl": "mr-ironstone-45-3-inch"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "Homall 44 Inch",
+        "price": 4800000,
+        "description": "میز گیمینگ Homall با طراحی مدرن و کم‌جا، مناسب برای فضاهای کوچک.",
+        "category": "مبلمان",
+        "stock": 11,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/homall-44.jpg"
+        ],
+        "imageAlt": "میز بازی Homall 44 Inch",
+        "discount": 7,
+        "finalPrice": 4464000,
+        "productUrl": "homall-44-inch"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "MOTPK 44 Inch",
+        "price": 6200000,
+        "description": "میز گیمینگ MOTPK با امکانات پایه مانیتور و نگهدارنده هدفون، طراحی ارگونومیک و جذاب.",
+        "category": "مبلمان",
+        "stock": 13,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/motpk-44.jpg"
+        ],
+        "imageAlt": "میز بازی MOTPK 44 Inch",
+        "discount": 10,
+        "finalPrice": 5580000,
+        "productUrl": "motpk-44-inch"
+    },
+    {
+        "isDeleted": false,
+        "featured": false,
+        "name": "Foxemart 47 Inch",
+        "price": 6800000,
+        "description": "میز گیمینگ Foxemart 47 اینچ با طراحی ساده و مقاوم، مناسب برای مانیتورهای دوگانه.",
+        "category": "مبلمان",
+        "stock": 10,
+        "attributes": [
+            {
+                "title": "رنگ",
+                "values": [
+                    "مشکی"
+                ]
+            },
+            {
+                "title": "جنس",
+                "values": [
+                    "چوب MDF",
+                    "فلز"
+                ]
+            }
+        ],
+        "images": [
+            "/images/products/tables/foxemart-47.jpg"
+        ],
+        "imageAlt": "میز بازی Foxemart 47 Inch",
+        "discount": 8,
+        "finalPrice": 6256000,
+        "productUrl": "foxemart-47-inch"
+    }
+]

@@ -72,7 +72,7 @@ export default function Page() {
 
     return (
         <>
-            <NextSeo noindex={true} nofollow={true} />
+            <NextSeo noindex={true} />
             <div>
                 {cartData.length <= 0 ? (
                     <div className="w-full h-[80vh] flex justify-center items-center flex-col gap-2">
