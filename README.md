@@ -44,13 +44,13 @@ Visit http://localhost:3000 in your browser to view the online store.
     User Authentication: Manage orders and user accounts.
 Here's the updated **README.md** with the images organized properly:
 
----
+
 
 # GameDesk Shop - Online Store
 
 **GameDesk Shop** is an online store built with the MERN stack, offering high-quality gaming desks and accessories. The store features a responsive design, easy navigation, an interactive cart, and product paging for a seamless shopping experience.
 
----
+
 
 ## 🚀 Getting Started
 
@@ -73,17 +73,17 @@ npm run dev
 
 Visit `http://localhost:3000` in your browser to view the online store.
 
----
+
 
 ## 🛠 Technologies Used
 
 - **MongoDB**: Database to store product and user data.
 - **Express.js**: Backend framework for API routes and server-side logic.
-- **React.js**: Frontend library for building user interfaces.
+- **Next.js**: Frontend framework for building user interfaces.
 - **Node.js**: Server-side JavaScript runtime.
 - **Tailwind CSS**: Utility-first CSS framework for custom styling.
 
----
+
 
 ## 🎨 Features
 
@@ -92,6 +92,8 @@ Visit `http://localhost:3000` in your browser to view the online store.
 - **Product Paging**: Browse through products with easy-to-use pagination.
 - **Secure Payment Integration**: Support for secure payment methods.
 - **User Authentication**: Manage orders and user accounts.
+
+
 
 ---
 
